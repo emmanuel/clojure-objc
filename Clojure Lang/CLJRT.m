@@ -31,7 +31,7 @@ static id CLJRT_readTrueFalseUnknown(NSString *s)
 
 // lifted from StackOverflow: http://stackoverflow.com/a/4330943
 // and MAObjcRuntime: https://github.com/mikeash/MAObjCRuntime/blob/master/RTProtocol.m
-static inline void CLJRT_addDefaultImplementationForClassOfMethodsFromProtocolFromImplementingClass(Class conformingClass, Protocol *proto, Class implementingClass)
+static inline void CLJRT_addDefaultImplementationForClassOfProtocolFromImplementingClass(Class conformingClass, Protocol *proto, Class implementingClass)
 {
     unsigned int count;
     BOOL isRequiredMethod = NO;

@@ -40,7 +40,7 @@
                                                 hash:(NSInteger)hash
                                                  key:(id)key
                                                value:(id)val
-                                           addedLeaf:(NSValue)addedLeaf;
+                                           addedLeaf:(NSValue *)addedLeaf;
 
 - (id<CLJPersistentHashMapINode>)withoutWithEditThread:(NSThread *)edit
                                                  shift:(NSInteger)shift

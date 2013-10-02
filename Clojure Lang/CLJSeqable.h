@@ -7,13 +7,10 @@
 //
 
 @protocol CLJISeq;
-@protocol CLJSeqable;
-#import "NSArray+CLJSeqable.h"
-#import "NSEnumerator+CLJSeqable.h"
 
 
 @protocol CLJSeqable <NSObject>
 
-- (id <CLJISeq>)seq;
+- (id<CLJISeq>)seq;
 
 @end

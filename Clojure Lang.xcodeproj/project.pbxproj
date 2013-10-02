@@ -15,6 +15,9 @@
 		1456991617F15FEE000B7CE8 /* NSEnumerator+CLJSeqable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1456991517F15FEE000B7CE8 /* NSEnumerator+CLJSeqable.m */; };
 		1456991917F16490000B7CE8 /* NSArray+CLJIndexed.m in Sources */ = {isa = PBXBuildFile; fileRef = 1456991817F16490000B7CE8 /* NSArray+CLJIndexed.m */; };
 		146C7BE017FBF1ED000FCBEA /* CLJPersistentVectorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 146C7BDF17FBF1ED000FCBEA /* CLJPersistentVectorNode.m */; };
+		146C7BE417FC5B48000FCBEA /* CLJPersistentVectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 146C7BE317FC5B48000FCBEA /* CLJPersistentVectorTests.m */; };
+		146C7BE617FC5F29000FCBEA /* CLJIPersistentCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 146C7BE517FC5F29000FCBEA /* CLJIPersistentCollection.m */; };
+		146C7BE817FC607D000FCBEA /* CLJSequential.m in Sources */ = {isa = PBXBuildFile; fileRef = 146C7BE717FC607D000FCBEA /* CLJSequential.m */; };
 		14AE6D3A17E8415A00CAAD55 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AE6D3917E8415A00CAAD55 /* Foundation.framework */; };
 		14AE6D3F17E8415A00CAAD55 /* Clojure_Lang.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 14AE6D3E17E8415A00CAAD55 /* Clojure_Lang.h */; };
 		14AE6D4117E8415A00CAAD55 /* Clojure_Lang.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AE6D4017E8415A00CAAD55 /* Clojure_Lang.m */; };
@@ -91,6 +94,9 @@
 		146C7BDE17FBF1ED000FCBEA /* CLJPersistentVectorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJPersistentVectorNode.h; sourceTree = "<group>"; };
 		146C7BDF17FBF1ED000FCBEA /* CLJPersistentVectorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJPersistentVectorNode.m; sourceTree = "<group>"; };
 		146C7BE117FBF899000FCBEA /* CLJPersistentVectorConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLJPersistentVectorConstants.h; sourceTree = "<group>"; };
+		146C7BE317FC5B48000FCBEA /* CLJPersistentVectorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJPersistentVectorTests.m; sourceTree = "<group>"; };
+		146C7BE517FC5F29000FCBEA /* CLJIPersistentCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJIPersistentCollection.m; sourceTree = "<group>"; };
+		146C7BE717FC607D000FCBEA /* CLJSequential.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJSequential.m; sourceTree = "<group>"; };
 		14AE6D3617E8415A00CAAD55 /* libClojure Lang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libClojure Lang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14AE6D3917E8415A00CAAD55 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		14AE6D3D17E8415A00CAAD55 /* Clojure Lang-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Clojure Lang-Prefix.pch"; sourceTree = "<group>"; };
@@ -309,6 +315,7 @@
 		14AE6D4F17E8415A00CAAD55 /* Clojure LangTests */ = {
 			isa = PBXGroup;
 			children = (
+				146C7BE317FC5B48000FCBEA /* CLJPersistentVectorTests.m */,
 				14AE6D5517E8415A00CAAD55 /* Clojure_LangTests.m */,
 				14AE6D5017E8415A00CAAD55 /* Supporting Files */,
 			);
@@ -341,6 +348,7 @@
 				14AE6D6A17EA0EC500CAAD55 /* CLJIObj.h */,
 				14AE6D9917EB046A00CAAD55 /* CLJIPending.h */,
 				14AE6D6217EA06C100CAAD55 /* CLJIPersistentCollection.h */,
+				146C7BE517FC5F29000FCBEA /* CLJIPersistentCollection.m */,
 				14AE6D6C17EA180700CAAD55 /* CLJIPersistentList.h */,
 				14AE6D6B17EA0F3900CAAD55 /* CLJIPersistentMap.h */,
 				14AE6D6D17EA185C00CAAD55 /* CLJIPersistentSet.h */,
@@ -356,6 +364,7 @@
 				14B134DF17F6570C0032A943 /* CLJReversible.h */,
 				14AE6D5F17E8419600CAAD55 /* CLJSeqable.h */,
 				14AE6D6017EA04A600CAAD55 /* CLJSequential.h */,
+				146C7BE717FC607D000FCBEA /* CLJSequential.m */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -510,8 +519,10 @@
 				1456991917F16490000B7CE8 /* NSArray+CLJIndexed.m in Sources */,
 				143702D717F18B310033F317 /* NSString+CLJCounted.m in Sources */,
 				14B134DD17F25FA30032A943 /* CLJPersistentHashMapUtil.m in Sources */,
+				146C7BE817FC607D000FCBEA /* CLJSequential.m in Sources */,
 				14537A3317F166C4004F8B6B /* NSString+CLJIndexed.m in Sources */,
 				14AE6D7017EA308300CAAD55 /* CLJAPersistentVector.m in Sources */,
+				146C7BE617FC5F29000FCBEA /* CLJIPersistentCollection.m in Sources */,
 				14AE6DA017ECD6AD00CAAD55 /* CLJCons.m in Sources */,
 				14B134E217F657F50032A943 /* CLJBox.m in Sources */,
 				14B134CC17F191C50032A943 /* NSArray+CLJILookup.m in Sources */,
@@ -536,6 +547,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14AE6D5617E8415A00CAAD55 /* Clojure_LangTests.m in Sources */,
+				146C7BE417FC5B48000FCBEA /* CLJPersistentVectorTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

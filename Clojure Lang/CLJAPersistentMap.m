@@ -19,7 +19,7 @@
     if ([object conformsToProtocol:@protocol(CLJIMapEntry)])
     {
         id <CLJIMapEntry> mapEntry = (id <CLJIMapEntry>)object;
-        return [self assoc:[mapEntry key], [mapEntry val]];
+        return [self assocKey:[mapEntry key] withValue:[mapEntry val]];
     }
     else if ([object conformsToProtocol:@protocol(CLJIPersistentVector)])
     {
@@ -31,14 +31,14 @@
                                          userInfo:nil];
         }
 
-        return [self assoc:[vector nth:0], [vector nth:1]];
+        return [self assocKey:[vector nth:0] withValue:[vector nth:1]];
     }
 
     id <CLJIPersistentMap> returnValue = self;
 
     for (id <CLJISeq> es = [object seq]; es != nil; es = [es next]) {
         id <CLJIMapEntry> mapEntry = (id <CLJIMapEntry>)[es first];
-        returnValue = [returnValue assoc:[mapEntry key], [mapEntry val]];
+        returnValue = [returnValue assocKey:[mapEntry key] withValue:[mapEntry val]];
     }
 
     return returnValue;

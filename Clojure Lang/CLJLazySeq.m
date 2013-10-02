@@ -45,17 +45,17 @@
     return count;
 }
 
-- (id)forwardingTargetForSelector:(SEL)aSelector
-{
-    if ((@selector(first) == aSelector) || (@selector(next) == aSelector) || ())
-    {
-        
-    }
-    else if ([@protocol(CLJISeq) ])
-    {
-        
-    }
-}
+//- (id)forwardingTargetForSelector:(SEL)aSelector
+//{
+//    if ((@selector(first) == aSelector) || (@selector(next) == aSelector) || ())
+//    {
+//        
+//    }
+//    else if ([@protocol(CLJISeq) ])
+//    {
+//        
+//    }
+//}
 
 #pragma mark - CLJISeq methods
 

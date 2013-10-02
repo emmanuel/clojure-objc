@@ -43,8 +43,8 @@
     if (nil == node)
     {
         NSArray *clone = [_array mutableCopy];
-        [clone ]
-        return [[[self class] alloc] initWithEditThread:nil count:(self.count + 1) array:[self cloneAndSetArray:self.array index:index node:[CLJPersistentHashMapBitmapIndexNode empty]]];
+        // [clone ]
+        // return [[[self class] alloc] initWithEditThread:nil count:(self.count + 1) array:[self cloneAndSetArray:self.array index:index node:[CLJPersistentHashMapBitmapIndexNode empty]]];
     }
 
     return node;

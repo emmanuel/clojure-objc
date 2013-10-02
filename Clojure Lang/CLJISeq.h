@@ -8,14 +8,11 @@
 
 #import "CLJIPersistentCollection.h"
 
-@protocol CLJISeq <CLJIPersistentCollection, NSObject>
+@protocol CLJISeq <CLJIPersistentCollection>
 
 - (id)first;
-
-- (id <CLJISeq>)next;
-
-- (id <CLJISeq>)more;
-
-- (id <CLJISeq>)cons:(id)object;
+- (id<CLJISeq>)next;
+- (id<CLJISeq>)more;
+- (id<CLJISeq>)cons:(id)object;
 
 @end

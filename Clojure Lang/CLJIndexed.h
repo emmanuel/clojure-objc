@@ -16,7 +16,6 @@
 @protocol CLJIndexed <NSObject, CLJCounted>
 
 - (id)nth:(NSInteger)index;
-
 - (id)nth:(NSInteger)index withDefault:(id)notFound;
 
 @end

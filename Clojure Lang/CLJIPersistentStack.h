@@ -9,10 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "CLJIPersistentCollection.h"
 
-@protocol CLJIPersistentStack <NSObject, CLJIPersistentStack>
+@protocol CLJIPersistentStack <NSObject, CLJIPersistentCollection>
 
 - (id)peek;
-
-- (id <CLJIPersistentStack>)pop;
+- (id<CLJIPersistentStack>)pop;
 
 @end

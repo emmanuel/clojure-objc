@@ -10,13 +10,11 @@
 #import "CLJAssociative.h"
 #import "CLJCounted.h"
 
-
-@protocol CLJIPersistentMap <NSFastEnumeration, CLJAssociative, CLJCounted>
+// TODO: NSFastEnumeration
+@protocol CLJIPersistentMap <CLJAssociative, CLJCounted>
 
 - (id <CLJIPersistentMap>)assocKey:(id)key withValue:(id)value;
-
-- (id <CLJIPersistentMap>)assocEx:(id)key, id val;
-
+- (id <CLJIPersistentMap>)assocEx:(id)key withValue:(id)value;
 - (id <CLJIPersistentMap>)without:(id)key;
 
 @end

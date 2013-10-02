@@ -77,6 +77,7 @@
 
 - (id<CLJIPersistentMap>)assocKey:(id)key withValue:(id)value
 {
+    return nil;
     if (nil == key)
     {
         if (_hasNil && (value == _nilValue))

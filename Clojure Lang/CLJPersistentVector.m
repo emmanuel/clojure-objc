@@ -13,8 +13,8 @@
 @interface CLJPersistentVector ()
 
 @property (nonatomic, strong) id<CLJIPersistentMap> meta;
-@property (nonatomic) NSInteger count;
-@property (nonatomic) NSInteger shift;
+@property (nonatomic) NSUInteger count;
+@property (nonatomic) NSUInteger shift;
 @property (nonatomic, strong) CLJPersistentVectorNode *root;
 @property (nonatomic, strong) NSArray *tail;
 
@@ -39,8 +39,8 @@
 }
 
 + (instancetype)vectorWithMeta:(id<CLJIPersistentMap>)meta
-                         count:(NSInteger)count
-                         shift:(NSInteger)shift
+                         count:(NSUInteger)count
+                         shift:(NSUInteger)shift
                           root:(CLJPersistentVectorNode *)root
                           tail:(NSArray *)tail
 {
@@ -48,8 +48,8 @@
 }
 
 - (instancetype)initWithMeta:(id<CLJIPersistentMap>)meta
-                       count:(NSInteger)count
-                       shift:(NSInteger)shift
+                       count:(NSUInteger)count
+                       shift:(NSUInteger)shift
                         root:(CLJPersistentVectorNode *)root
                         tail:(NSArray *)tail
 {
@@ -110,7 +110,7 @@
     }
 }
 
-- (CLJPersistentVectorNode *)doAssocWithLevel:(NSInteger)level node:(CLJPersistentVectorNode *)node index:(NSInteger)index object:(id)object;
+- (CLJPersistentVectorNode *)doAssocWithLevel:(NSUInteger)level node:(CLJPersistentVectorNode *)node index:(NSInteger)index object:(id)object;
 {
     CLJPersistentVectorNode *ret = [node nodeWithArray:@[ ]];
     NSMutableArray *temp = [node.array mutableCopy];
@@ -152,7 +152,7 @@
     {
         CLJPersistentVectorNode *newRoot;
         CLJPersistentVectorNode *tailNode = [self.root nodeWithArray:self.tail];
-        NSInteger newShift = self.shift;
+        NSUInteger newShift = self.shift;
 
         // overflow root?
         if ((self.count >> kCLJPersistentVectorLevelBitPartitionWidth) > (1 << self.shift))
@@ -179,7 +179,7 @@
 
 - (CLJPersistentVectorNode *)nodeWithWithPathToNode:(CLJPersistentVectorNode *)targetNode
                                          editThread:(NSThread *)editThread
-                                              level:(NSInteger)level
+                                              level:(NSUInteger)level
 {
     if (level == 0)
     {
@@ -198,7 +198,7 @@
     }
 }
 
-- (CLJPersistentVectorNode *)pushTailWithLevel:(NSInteger)level
+- (CLJPersistentVectorNode *)pushTailWithLevel:(NSUInteger)level
                                         parent:(CLJPersistentVectorNode *)parent
                                       tailNode:(CLJPersistentVectorNode *)tailNode
 {
@@ -266,7 +266,7 @@
     {
         NSArray *newTail = [self arrayForIndex:(self.count - 2)];
         CLJPersistentVectorNode *newRoot = [self popTailWithLevel:self.shift node:self.root];
-        NSInteger newShift = self.shift;
+        NSUInteger newShift = self.shift;
         if (newRoot == nil)
         {
             newRoot = [CLJPersistentVectorNode empty];
@@ -313,7 +313,7 @@
         {
             CLJPersistentVectorNode *node = self.root;
             NSInteger subIndex = 0;
-            for (NSInteger level = self.shift; level > 0; level -= kCLJPersistentVectorLevelBitPartitionWidth) {
+            for (NSUInteger level = self.shift; level > 0; level -= kCLJPersistentVectorLevelBitPartitionWidth) {
                 subIndex = ((index >> level) & kCLJPersistentVectorCurrentLevelMask);
                 node = [node.array objectAtIndex:subIndex];
             }
@@ -324,12 +324,12 @@
     else
     {
         @throw [NSException exceptionWithName:NSRangeException
-                                       reason:[NSString stringWithFormat:@"index out of bounds: %lu", index]
+                                       reason:[NSString stringWithFormat:@"index out of bounds: %lu", (long)index]
                                      userInfo:nil];
     }
 }
 
-- (CLJPersistentVectorNode *)popTailWithLevel:(NSInteger)level node:(CLJPersistentVectorNode *)node
+- (CLJPersistentVectorNode *)popTailWithLevel:(NSUInteger)level node:(CLJPersistentVectorNode *)node
 {
     NSInteger subIndex = ((self.count - 2) >> level) & kCLJPersistentVectorCurrentLevelMask;
     // non-leaf?
@@ -367,6 +367,19 @@
     }
 }
 
+
+#pragma mark - CLJIndexed methods
+
+- (id)nth:(NSInteger)index
+{
+    NSArray *targetArray = [self arrayForIndex:index];
+    return [targetArray objectAtIndex:(index & kCLJPersistentVectorCurrentLevelMask)];
+}
+
+//public Object nth(int i){
+//	Object[] node = arrayFor(i);
+//	return node[i & 0x01f];
+//}
 
 #pragma mark - CLJIPersistentCollection methods
 

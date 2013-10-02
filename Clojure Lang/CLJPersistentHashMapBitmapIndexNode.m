@@ -55,7 +55,7 @@
                                           value:(id)val
                                       addedLeaf:(id)addedLeaf
 {
-    
+    return nil;
 //    int bit = bitpos(hash, shift);
 //    int idx = index(bit);
 //    if((bitmap & bit) != 0) {
