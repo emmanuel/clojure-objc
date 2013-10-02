@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		143702D717F18B310033F317 /* NSString+CLJCounted.m in Sources */ = {isa = PBXBuildFile; fileRef = 143702D617F18B310033F317 /* NSString+CLJCounted.m */; };
+		14537A3317F166C4004F8B6B /* NSString+CLJIndexed.m in Sources */ = {isa = PBXBuildFile; fileRef = 14537A3217F166C4004F8B6B /* NSString+CLJIndexed.m */; };
+		1456990717EF99F0000B7CE8 /* CLJEnumeratorSeq.m in Sources */ = {isa = PBXBuildFile; fileRef = 1456990617EF99F0000B7CE8 /* CLJEnumeratorSeq.m */; };
+		1456990A17F0A14F000B7CE8 /* CLJKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 1456990917F0A14F000B7CE8 /* CLJKeyword.m */; };
+		1456991317F15F38000B7CE8 /* NSArray+CLJSeqable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1456991217F15F38000B7CE8 /* NSArray+CLJSeqable.m */; };
+		1456991617F15FEE000B7CE8 /* NSEnumerator+CLJSeqable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1456991517F15FEE000B7CE8 /* NSEnumerator+CLJSeqable.m */; };
+		1456991917F16490000B7CE8 /* NSArray+CLJIndexed.m in Sources */ = {isa = PBXBuildFile; fileRef = 1456991817F16490000B7CE8 /* NSArray+CLJIndexed.m */; };
+		146C7BE017FBF1ED000FCBEA /* CLJPersistentVectorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 146C7BDF17FBF1ED000FCBEA /* CLJPersistentVectorNode.m */; };
 		14AE6D3A17E8415A00CAAD55 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AE6D3917E8415A00CAAD55 /* Foundation.framework */; };
 		14AE6D3F17E8415A00CAAD55 /* Clojure_Lang.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 14AE6D3E17E8415A00CAAD55 /* Clojure_Lang.h */; };
 		14AE6D4117E8415A00CAAD55 /* Clojure_Lang.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AE6D4017E8415A00CAAD55 /* Clojure_Lang.m */; };
@@ -16,6 +24,28 @@
 		14AE6D4E17E8415A00CAAD55 /* libClojure Lang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AE6D3617E8415A00CAAD55 /* libClojure Lang.a */; };
 		14AE6D5417E8415A00CAAD55 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14AE6D5217E8415A00CAAD55 /* InfoPlist.strings */; };
 		14AE6D5617E8415A00CAAD55 /* Clojure_LangTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AE6D5517E8415A00CAAD55 /* Clojure_LangTests.m */; };
+		14AE6D7017EA308300CAAD55 /* CLJAPersistentVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AE6D6F17EA308300CAAD55 /* CLJAPersistentVector.m */; };
+		14AE6D7517EA30E200CAAD55 /* CLJAFn.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AE6D7417EA30E200CAAD55 /* CLJAFn.m */; };
+		14AE6D7917EA35ED00CAAD55 /* CLJAPersistentMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AE6D7817EA35ED00CAAD55 /* CLJAPersistentMap.m */; };
+		14AE6D7D17EA364400CAAD55 /* CLJPersistentHashMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AE6D7C17EA364400CAAD55 /* CLJPersistentHashMap.m */; };
+		14AE6D8417EAC73400CAAD55 /* CLJRT.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AE6D8317EAC73400CAAD55 /* CLJRT.m */; };
+		14AE6D8817EACA7800CAAD55 /* CLJSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AE6D8717EACA7800CAAD55 /* CLJSymbol.m */; };
+		14AE6D8C17EAD15800CAAD55 /* CLJUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AE6D8B17EAD15800CAAD55 /* CLJUtil.m */; };
+		14AE6D8F17EAEF4100CAAD55 /* CLJObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AE6D8E17EAEF4100CAAD55 /* CLJObj.m */; };
+		14AE6D9217EAF0D400CAAD55 /* CLJASeq.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AE6D9117EAF0D400CAAD55 /* CLJASeq.m */; };
+		14AE6D9517EAF57800CAAD55 /* CLJPersistentList.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AE6D9417EAF57800CAAD55 /* CLJPersistentList.m */; };
+		14AE6D9817EB041000CAAD55 /* CLJLazySeq.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AE6D9717EB041000CAAD55 /* CLJLazySeq.m */; };
+		14AE6D9C17EB0CEF00CAAD55 /* CLJArraySeq.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AE6D9B17EB0CEF00CAAD55 /* CLJArraySeq.m */; };
+		14AE6DA017ECD6AD00CAAD55 /* CLJCons.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AE6D9F17ECD6AD00CAAD55 /* CLJCons.m */; };
+		14B134C617F18EF20032A943 /* NSDictionary+CLJILookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134C517F18EF20032A943 /* NSDictionary+CLJILookup.m */; };
+		14B134C917F1909A0032A943 /* NSString+CLJILookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134C817F1909A0032A943 /* NSString+CLJILookup.m */; };
+		14B134CC17F191C50032A943 /* NSArray+CLJILookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134CB17F191C50032A943 /* NSArray+CLJILookup.m */; };
+		14B134CF17F1927F0032A943 /* NSObject+CLJILookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134CE17F1927F0032A943 /* NSObject+CLJILookup.m */; };
+		14B134D717F206610032A943 /* CLJPersistentHashMapArrayNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134D617F206610032A943 /* CLJPersistentHashMapArrayNode.m */; };
+		14B134DA17F2093A0032A943 /* CLJPersistentHashMapBitmapIndexNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134D917F2093A0032A943 /* CLJPersistentHashMapBitmapIndexNode.m */; };
+		14B134DD17F25FA30032A943 /* CLJPersistentHashMapUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134DC17F25FA30032A943 /* CLJPersistentHashMapUtil.m */; };
+		14B134E217F657F50032A943 /* CLJBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134E117F657F50032A943 /* CLJBox.m */; };
+		14B134E517F9DA610032A943 /* CLJPersistentVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134E417F9DA610032A943 /* CLJPersistentVector.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +72,25 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		143702D517F18B310033F317 /* NSString+CLJCounted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CLJCounted.h"; sourceTree = "<group>"; };
+		143702D617F18B310033F317 /* NSString+CLJCounted.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CLJCounted.m"; sourceTree = "<group>"; };
+		14537A3117F166C4004F8B6B /* NSString+CLJIndexed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CLJIndexed.h"; sourceTree = "<group>"; };
+		14537A3217F166C4004F8B6B /* NSString+CLJIndexed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CLJIndexed.m"; sourceTree = "<group>"; };
+		14537A3517F1681E004F8B6B /* NSDictionary+CLJCounted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+CLJCounted.h"; sourceTree = "<group>"; };
+		1456990517EF99F0000B7CE8 /* CLJEnumeratorSeq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJEnumeratorSeq.h; sourceTree = "<group>"; };
+		1456990617EF99F0000B7CE8 /* CLJEnumeratorSeq.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJEnumeratorSeq.m; sourceTree = "<group>"; };
+		1456990817F0A14F000B7CE8 /* CLJKeyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJKeyword.h; sourceTree = "<group>"; };
+		1456990917F0A14F000B7CE8 /* CLJKeyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJKeyword.m; sourceTree = "<group>"; };
+		1456990B17F11A64000B7CE8 /* CLJIReference.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLJIReference.h; sourceTree = "<group>"; };
+		1456991117F15F38000B7CE8 /* NSArray+CLJSeqable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+CLJSeqable.h"; sourceTree = "<group>"; };
+		1456991217F15F38000B7CE8 /* NSArray+CLJSeqable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+CLJSeqable.m"; sourceTree = "<group>"; };
+		1456991417F15FEE000B7CE8 /* NSEnumerator+CLJSeqable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSEnumerator+CLJSeqable.h"; sourceTree = "<group>"; };
+		1456991517F15FEE000B7CE8 /* NSEnumerator+CLJSeqable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSEnumerator+CLJSeqable.m"; sourceTree = "<group>"; };
+		1456991717F16490000B7CE8 /* NSArray+CLJIndexed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+CLJIndexed.h"; sourceTree = "<group>"; };
+		1456991817F16490000B7CE8 /* NSArray+CLJIndexed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+CLJIndexed.m"; sourceTree = "<group>"; };
+		146C7BDE17FBF1ED000FCBEA /* CLJPersistentVectorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJPersistentVectorNode.h; sourceTree = "<group>"; };
+		146C7BDF17FBF1ED000FCBEA /* CLJPersistentVectorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJPersistentVectorNode.m; sourceTree = "<group>"; };
+		146C7BE117FBF899000FCBEA /* CLJPersistentVectorConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLJPersistentVectorConstants.h; sourceTree = "<group>"; };
 		14AE6D3617E8415A00CAAD55 /* libClojure Lang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libClojure Lang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14AE6D3917E8415A00CAAD55 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		14AE6D3D17E8415A00CAAD55 /* Clojure Lang-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Clojure Lang-Prefix.pch"; sourceTree = "<group>"; };
@@ -53,6 +102,80 @@
 		14AE6D5117E8415A00CAAD55 /* Clojure LangTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Clojure LangTests-Info.plist"; sourceTree = "<group>"; };
 		14AE6D5317E8415A00CAAD55 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		14AE6D5517E8415A00CAAD55 /* Clojure_LangTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Clojure_LangTests.m; sourceTree = "<group>"; };
+		14AE6D5F17E8419600CAAD55 /* CLJSeqable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJSeqable.h; sourceTree = "<group>"; };
+		14AE6D6017EA04A600CAAD55 /* CLJSequential.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJSequential.h; sourceTree = "<group>"; };
+		14AE6D6117EA057300CAAD55 /* CLJAssociative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJAssociative.h; sourceTree = "<group>"; };
+		14AE6D6217EA06C100CAAD55 /* CLJIPersistentCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJIPersistentCollection.h; sourceTree = "<group>"; };
+		14AE6D6317EA088A00CAAD55 /* CLJILookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJILookup.h; sourceTree = "<group>"; };
+		14AE6D6417EA094500CAAD55 /* CLJIPersistentStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJIPersistentStack.h; sourceTree = "<group>"; };
+		14AE6D6517EA09B300CAAD55 /* CLJIPersistentVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJIPersistentVector.h; sourceTree = "<group>"; };
+		14AE6D6617EA0A4200CAAD55 /* CLJIndexed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJIndexed.h; sourceTree = "<group>"; };
+		14AE6D6717EA0A7300CAAD55 /* CLJCounted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJCounted.h; sourceTree = "<group>"; };
+		14AE6D6817EA0DA100CAAD55 /* CLJIFn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJIFn.h; sourceTree = "<group>"; };
+		14AE6D6917EA0E7700CAAD55 /* CLJIMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJIMeta.h; sourceTree = "<group>"; };
+		14AE6D6A17EA0EC500CAAD55 /* CLJIObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJIObj.h; sourceTree = "<group>"; };
+		14AE6D6B17EA0F3900CAAD55 /* CLJIPersistentMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJIPersistentMap.h; sourceTree = "<group>"; };
+		14AE6D6C17EA180700CAAD55 /* CLJIPersistentList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJIPersistentList.h; sourceTree = "<group>"; };
+		14AE6D6D17EA185C00CAAD55 /* CLJIPersistentSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJIPersistentSet.h; sourceTree = "<group>"; };
+		14AE6D6E17EA308300CAAD55 /* CLJAPersistentVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJAPersistentVector.h; sourceTree = "<group>"; };
+		14AE6D6F17EA308300CAAD55 /* CLJAPersistentVector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJAPersistentVector.m; sourceTree = "<group>"; };
+		14AE6D7317EA30E200CAAD55 /* CLJAFn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJAFn.h; sourceTree = "<group>"; };
+		14AE6D7417EA30E200CAAD55 /* CLJAFn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJAFn.m; sourceTree = "<group>"; };
+		14AE6D7617EA340C00CAAD55 /* CLJISeq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJISeq.h; sourceTree = "<group>"; };
+		14AE6D7717EA35ED00CAAD55 /* CLJAPersistentMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJAPersistentMap.h; sourceTree = "<group>"; };
+		14AE6D7817EA35ED00CAAD55 /* CLJAPersistentMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJAPersistentMap.m; sourceTree = "<group>"; };
+		14AE6D7B17EA364400CAAD55 /* CLJPersistentHashMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJPersistentHashMap.h; sourceTree = "<group>"; };
+		14AE6D7C17EA364400CAAD55 /* CLJPersistentHashMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJPersistentHashMap.m; sourceTree = "<group>"; };
+		14AE6D7E17EA367B00CAAD55 /* CLJIEditableCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJIEditableCollection.h; sourceTree = "<group>"; };
+		14AE6D7F17EA454600CAAD55 /* CLJINode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CLJINode.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		14AE6D8017EA45FC00CAAD55 /* CLJIMapEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJIMapEntry.h; sourceTree = "<group>"; };
+		14AE6D8117EA659A00CAAD55 /* CLJIHashEq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJIHashEq.h; sourceTree = "<group>"; };
+		14AE6D8217EAC73400CAAD55 /* CLJRT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLJRT.h; path = "Clojure Lang/CLJRT.h"; sourceTree = "<group>"; };
+		14AE6D8317EAC73400CAAD55 /* CLJRT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLJRT.m; path = "Clojure Lang/CLJRT.m"; sourceTree = "<group>"; };
+		14AE6D8617EACA7800CAAD55 /* CLJSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJSymbol.h; sourceTree = "<group>"; };
+		14AE6D8717EACA7800CAAD55 /* CLJSymbol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJSymbol.m; sourceTree = "<group>"; };
+		14AE6D8917EACBC600CAAD55 /* CLJNamed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJNamed.h; sourceTree = "<group>"; };
+		14AE6D8A17EAD15800CAAD55 /* CLJUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLJUtil.h; path = "Clojure Lang/CLJUtil.h"; sourceTree = "<group>"; };
+		14AE6D8B17EAD15800CAAD55 /* CLJUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLJUtil.m; path = "Clojure Lang/CLJUtil.m"; sourceTree = "<group>"; };
+		14AE6D8D17EAEF4100CAAD55 /* CLJObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJObj.h; sourceTree = "<group>"; };
+		14AE6D8E17EAEF4100CAAD55 /* CLJObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJObj.m; sourceTree = "<group>"; };
+		14AE6D9017EAF0D400CAAD55 /* CLJASeq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJASeq.h; sourceTree = "<group>"; };
+		14AE6D9117EAF0D400CAAD55 /* CLJASeq.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJASeq.m; sourceTree = "<group>"; };
+		14AE6D9317EAF57800CAAD55 /* CLJPersistentList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJPersistentList.h; sourceTree = "<group>"; };
+		14AE6D9417EAF57800CAAD55 /* CLJPersistentList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJPersistentList.m; sourceTree = "<group>"; };
+		14AE6D9617EB041000CAAD55 /* CLJLazySeq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJLazySeq.h; sourceTree = "<group>"; };
+		14AE6D9717EB041000CAAD55 /* CLJLazySeq.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJLazySeq.m; sourceTree = "<group>"; };
+		14AE6D9917EB046A00CAAD55 /* CLJIPending.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJIPending.h; sourceTree = "<group>"; };
+		14AE6D9A17EB0CEF00CAAD55 /* CLJArraySeq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJArraySeq.h; sourceTree = "<group>"; };
+		14AE6D9B17EB0CEF00CAAD55 /* CLJArraySeq.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJArraySeq.m; sourceTree = "<group>"; };
+		14AE6D9D17EB0D0900CAAD55 /* CLJIndexedSeq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJIndexedSeq.h; sourceTree = "<group>"; };
+		14AE6D9E17ECD6AD00CAAD55 /* CLJCons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJCons.h; sourceTree = "<group>"; };
+		14AE6D9F17ECD6AD00CAAD55 /* CLJCons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJCons.m; sourceTree = "<group>"; };
+		14B134C417F18EF20032A943 /* NSDictionary+CLJILookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+CLJILookup.h"; sourceTree = "<group>"; };
+		14B134C517F18EF20032A943 /* NSDictionary+CLJILookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+CLJILookup.m"; sourceTree = "<group>"; };
+		14B134C717F1909A0032A943 /* NSString+CLJILookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CLJILookup.h"; sourceTree = "<group>"; };
+		14B134C817F1909A0032A943 /* NSString+CLJILookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CLJILookup.m"; sourceTree = "<group>"; };
+		14B134CA17F191C50032A943 /* NSArray+CLJILookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+CLJILookup.h"; sourceTree = "<group>"; };
+		14B134CB17F191C50032A943 /* NSArray+CLJILookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+CLJILookup.m"; sourceTree = "<group>"; };
+		14B134CD17F1927F0032A943 /* NSObject+CLJILookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CLJILookup.h"; sourceTree = "<group>"; };
+		14B134CE17F1927F0032A943 /* NSObject+CLJILookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CLJILookup.m"; sourceTree = "<group>"; };
+		14B134D017F193C20032A943 /* CLJCategories.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLJCategories.h; sourceTree = "<group>"; };
+		14B134D117F19B760032A943 /* CLJITransientCollection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLJITransientCollection.h; sourceTree = "<group>"; };
+		14B134D217F19BED0032A943 /* CLJITransientAssociative.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLJITransientAssociative.h; sourceTree = "<group>"; };
+		14B134D317F19C710032A943 /* CLJITransientMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLJITransientMap.h; sourceTree = "<group>"; };
+		14B134D417F1A4CF0032A943 /* CLJPersistentHashMapINode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLJPersistentHashMapINode.h; sourceTree = "<group>"; };
+		14B134D517F206610032A943 /* CLJPersistentHashMapArrayNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJPersistentHashMapArrayNode.h; sourceTree = "<group>"; };
+		14B134D617F206610032A943 /* CLJPersistentHashMapArrayNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJPersistentHashMapArrayNode.m; sourceTree = "<group>"; };
+		14B134D817F2093A0032A943 /* CLJPersistentHashMapBitmapIndexNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJPersistentHashMapBitmapIndexNode.h; sourceTree = "<group>"; };
+		14B134D917F2093A0032A943 /* CLJPersistentHashMapBitmapIndexNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJPersistentHashMapBitmapIndexNode.m; sourceTree = "<group>"; };
+		14B134DB17F25FA30032A943 /* CLJPersistentHashMapUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLJPersistentHashMapUtil.h; path = "Clojure Lang/CLJPersistentHashMapUtil.h"; sourceTree = "<group>"; };
+		14B134DC17F25FA30032A943 /* CLJPersistentHashMapUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLJPersistentHashMapUtil.m; path = "Clojure Lang/CLJPersistentHashMapUtil.m"; sourceTree = "<group>"; };
+		14B134DE17F4340A0032A943 /* NSArray+CLJCounted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+CLJCounted.h"; sourceTree = "<group>"; };
+		14B134DF17F6570C0032A943 /* CLJReversible.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLJReversible.h; sourceTree = "<group>"; };
+		14B134E017F657F50032A943 /* CLJBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJBox.h; sourceTree = "<group>"; };
+		14B134E117F657F50032A943 /* CLJBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJBox.m; sourceTree = "<group>"; };
+		14B134E317F9DA610032A943 /* CLJPersistentVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJPersistentVector.h; sourceTree = "<group>"; };
+		14B134E417F9DA610032A943 /* CLJPersistentVector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJPersistentVector.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +201,59 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1456991017F15EE4000B7CE8 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				14B134D017F193C20032A943 /* CLJCategories.h */,
+				14B134DE17F4340A0032A943 /* NSArray+CLJCounted.h */,
+				14B134CA17F191C50032A943 /* NSArray+CLJILookup.h */,
+				14B134CB17F191C50032A943 /* NSArray+CLJILookup.m */,
+				1456991717F16490000B7CE8 /* NSArray+CLJIndexed.h */,
+				1456991817F16490000B7CE8 /* NSArray+CLJIndexed.m */,
+				1456991117F15F38000B7CE8 /* NSArray+CLJSeqable.h */,
+				1456991217F15F38000B7CE8 /* NSArray+CLJSeqable.m */,
+				14537A3517F1681E004F8B6B /* NSDictionary+CLJCounted.h */,
+				14B134C417F18EF20032A943 /* NSDictionary+CLJILookup.h */,
+				14B134C517F18EF20032A943 /* NSDictionary+CLJILookup.m */,
+				1456991417F15FEE000B7CE8 /* NSEnumerator+CLJSeqable.h */,
+				1456991517F15FEE000B7CE8 /* NSEnumerator+CLJSeqable.m */,
+				14B134CD17F1927F0032A943 /* NSObject+CLJILookup.h */,
+				14B134CE17F1927F0032A943 /* NSObject+CLJILookup.m */,
+				143702D517F18B310033F317 /* NSString+CLJCounted.h */,
+				143702D617F18B310033F317 /* NSString+CLJCounted.m */,
+				14B134C717F1909A0032A943 /* NSString+CLJILookup.h */,
+				14B134C817F1909A0032A943 /* NSString+CLJILookup.m */,
+				14537A3117F166C4004F8B6B /* NSString+CLJIndexed.h */,
+				14537A3217F166C4004F8B6B /* NSString+CLJIndexed.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		146C7BDD17FBF1B2000FCBEA /* CLJPersistentVector */ = {
+			isa = PBXGroup;
+			children = (
+				14B134E317F9DA610032A943 /* CLJPersistentVector.h */,
+				14B134E417F9DA610032A943 /* CLJPersistentVector.m */,
+				146C7BDE17FBF1ED000FCBEA /* CLJPersistentVectorNode.h */,
+				146C7BDF17FBF1ED000FCBEA /* CLJPersistentVectorNode.m */,
+				146C7BE117FBF899000FCBEA /* CLJPersistentVectorConstants.h */,
+			);
+			name = CLJPersistentVector;
+			sourceTree = "<group>";
+		};
+		146C7BE217FC59B4000FCBEA /* CLJPersistentHashMap */ = {
+			isa = PBXGroup;
+			children = (
+				14AE6D7B17EA364400CAAD55 /* CLJPersistentHashMap.h */,
+				14AE6D7C17EA364400CAAD55 /* CLJPersistentHashMap.m */,
+				14B134D517F206610032A943 /* CLJPersistentHashMapArrayNode.h */,
+				14B134D617F206610032A943 /* CLJPersistentHashMapArrayNode.m */,
+				14B134D817F2093A0032A943 /* CLJPersistentHashMapBitmapIndexNode.h */,
+				14B134D917F2093A0032A943 /* CLJPersistentHashMapBitmapIndexNode.m */,
+			);
+			name = CLJPersistentHashMap;
+			sourceTree = "<group>";
+		};
 		14AE6D2D17E8415A00CAAD55 = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +288,11 @@
 			children = (
 				14AE6D3E17E8415A00CAAD55 /* Clojure_Lang.h */,
 				14AE6D4017E8415A00CAAD55 /* Clojure_Lang.m */,
+				14AE6D7217EA30AB00CAAD55 /* Abstract Classes */,
+				14AE6D7A17EA360900CAAD55 /* Concrete Classes */,
+				14AE6D7117EA309500CAAD55 /* Protocols */,
+				1456991017F15EE4000B7CE8 /* Categories */,
+				14AE6D8517EAC73C00CAAD55 /* Functions */,
 				14AE6D3C17E8415A00CAAD55 /* Supporting Files */,
 			);
 			path = "Clojure Lang";
@@ -141,6 +322,98 @@
 				14AE6D5217E8415A00CAAD55 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		14AE6D7117EA309500CAAD55 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				14AE6D6117EA057300CAAD55 /* CLJAssociative.h */,
+				14AE6D6717EA0A7300CAAD55 /* CLJCounted.h */,
+				14AE6D7E17EA367B00CAAD55 /* CLJIEditableCollection.h */,
+				14AE6D6817EA0DA100CAAD55 /* CLJIFn.h */,
+				14AE6D8117EA659A00CAAD55 /* CLJIHashEq.h */,
+				14AE6D6317EA088A00CAAD55 /* CLJILookup.h */,
+				14AE6D8017EA45FC00CAAD55 /* CLJIMapEntry.h */,
+				14AE6D6917EA0E7700CAAD55 /* CLJIMeta.h */,
+				14AE6D6617EA0A4200CAAD55 /* CLJIndexed.h */,
+				14AE6D9D17EB0D0900CAAD55 /* CLJIndexedSeq.h */,
+				14AE6D7F17EA454600CAAD55 /* CLJINode.h */,
+				14AE6D6A17EA0EC500CAAD55 /* CLJIObj.h */,
+				14AE6D9917EB046A00CAAD55 /* CLJIPending.h */,
+				14AE6D6217EA06C100CAAD55 /* CLJIPersistentCollection.h */,
+				14AE6D6C17EA180700CAAD55 /* CLJIPersistentList.h */,
+				14AE6D6B17EA0F3900CAAD55 /* CLJIPersistentMap.h */,
+				14AE6D6D17EA185C00CAAD55 /* CLJIPersistentSet.h */,
+				14AE6D6417EA094500CAAD55 /* CLJIPersistentStack.h */,
+				14AE6D6517EA09B300CAAD55 /* CLJIPersistentVector.h */,
+				1456990B17F11A64000B7CE8 /* CLJIReference.h */,
+				14AE6D7617EA340C00CAAD55 /* CLJISeq.h */,
+				14B134D217F19BED0032A943 /* CLJITransientAssociative.h */,
+				14B134D117F19B760032A943 /* CLJITransientCollection.h */,
+				14B134D317F19C710032A943 /* CLJITransientMap.h */,
+				14AE6D8917EACBC600CAAD55 /* CLJNamed.h */,
+				14B134D417F1A4CF0032A943 /* CLJPersistentHashMapINode.h */,
+				14B134DF17F6570C0032A943 /* CLJReversible.h */,
+				14AE6D5F17E8419600CAAD55 /* CLJSeqable.h */,
+				14AE6D6017EA04A600CAAD55 /* CLJSequential.h */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		14AE6D7217EA30AB00CAAD55 /* Abstract Classes */ = {
+			isa = PBXGroup;
+			children = (
+				14AE6D7317EA30E200CAAD55 /* CLJAFn.h */,
+				14AE6D7417EA30E200CAAD55 /* CLJAFn.m */,
+				14AE6D7717EA35ED00CAAD55 /* CLJAPersistentMap.h */,
+				14AE6D7817EA35ED00CAAD55 /* CLJAPersistentMap.m */,
+				14AE6D6E17EA308300CAAD55 /* CLJAPersistentVector.h */,
+				14AE6D6F17EA308300CAAD55 /* CLJAPersistentVector.m */,
+				14AE6D9017EAF0D400CAAD55 /* CLJASeq.h */,
+				14AE6D9117EAF0D400CAAD55 /* CLJASeq.m */,
+				14AE6D8D17EAEF4100CAAD55 /* CLJObj.h */,
+				14AE6D8E17EAEF4100CAAD55 /* CLJObj.m */,
+			);
+			name = "Abstract Classes";
+			sourceTree = "<group>";
+		};
+		14AE6D7A17EA360900CAAD55 /* Concrete Classes */ = {
+			isa = PBXGroup;
+			children = (
+				14AE6D9A17EB0CEF00CAAD55 /* CLJArraySeq.h */,
+				14AE6D9B17EB0CEF00CAAD55 /* CLJArraySeq.m */,
+				14B134E017F657F50032A943 /* CLJBox.h */,
+				14B134E117F657F50032A943 /* CLJBox.m */,
+				14AE6D9E17ECD6AD00CAAD55 /* CLJCons.h */,
+				14AE6D9F17ECD6AD00CAAD55 /* CLJCons.m */,
+				1456990517EF99F0000B7CE8 /* CLJEnumeratorSeq.h */,
+				1456990617EF99F0000B7CE8 /* CLJEnumeratorSeq.m */,
+				1456990817F0A14F000B7CE8 /* CLJKeyword.h */,
+				1456990917F0A14F000B7CE8 /* CLJKeyword.m */,
+				14AE6D9617EB041000CAAD55 /* CLJLazySeq.h */,
+				14AE6D9717EB041000CAAD55 /* CLJLazySeq.m */,
+				146C7BE217FC59B4000FCBEA /* CLJPersistentHashMap */,
+				14AE6D9317EAF57800CAAD55 /* CLJPersistentList.h */,
+				14AE6D9417EAF57800CAAD55 /* CLJPersistentList.m */,
+				146C7BDD17FBF1B2000FCBEA /* CLJPersistentVector */,
+				14AE6D8617EACA7800CAAD55 /* CLJSymbol.h */,
+				14AE6D8717EACA7800CAAD55 /* CLJSymbol.m */,
+			);
+			name = "Concrete Classes";
+			sourceTree = "<group>";
+		};
+		14AE6D8517EAC73C00CAAD55 /* Functions */ = {
+			isa = PBXGroup;
+			children = (
+				14AE6D8217EAC73400CAAD55 /* CLJRT.h */,
+				14AE6D8317EAC73400CAAD55 /* CLJRT.m */,
+				14AE6D8A17EAD15800CAAD55 /* CLJUtil.h */,
+				14AE6D8B17EAD15800CAAD55 /* CLJUtil.m */,
+				14B134DB17F25FA30032A943 /* CLJPersistentHashMapUtil.h */,
+				14B134DC17F25FA30032A943 /* CLJPersistentHashMapUtil.m */,
+			);
+			name = Functions;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,7 +497,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1456991317F15F38000B7CE8 /* NSArray+CLJSeqable.m in Sources */,
 				14AE6D4117E8415A00CAAD55 /* Clojure_Lang.m in Sources */,
+				14AE6D9817EB041000CAAD55 /* CLJLazySeq.m in Sources */,
+				14AE6D9517EAF57800CAAD55 /* CLJPersistentList.m in Sources */,
+				14B134C617F18EF20032A943 /* NSDictionary+CLJILookup.m in Sources */,
+				14AE6D9C17EB0CEF00CAAD55 /* CLJArraySeq.m in Sources */,
+				14AE6D7517EA30E200CAAD55 /* CLJAFn.m in Sources */,
+				1456990A17F0A14F000B7CE8 /* CLJKeyword.m in Sources */,
+				1456990717EF99F0000B7CE8 /* CLJEnumeratorSeq.m in Sources */,
+				14B134E517F9DA610032A943 /* CLJPersistentVector.m in Sources */,
+				1456991917F16490000B7CE8 /* NSArray+CLJIndexed.m in Sources */,
+				143702D717F18B310033F317 /* NSString+CLJCounted.m in Sources */,
+				14B134DD17F25FA30032A943 /* CLJPersistentHashMapUtil.m in Sources */,
+				14537A3317F166C4004F8B6B /* NSString+CLJIndexed.m in Sources */,
+				14AE6D7017EA308300CAAD55 /* CLJAPersistentVector.m in Sources */,
+				14AE6DA017ECD6AD00CAAD55 /* CLJCons.m in Sources */,
+				14B134E217F657F50032A943 /* CLJBox.m in Sources */,
+				14B134CC17F191C50032A943 /* NSArray+CLJILookup.m in Sources */,
+				14B134CF17F1927F0032A943 /* NSObject+CLJILookup.m in Sources */,
+				14AE6D9217EAF0D400CAAD55 /* CLJASeq.m in Sources */,
+				14AE6D8F17EAEF4100CAAD55 /* CLJObj.m in Sources */,
+				1456991617F15FEE000B7CE8 /* NSEnumerator+CLJSeqable.m in Sources */,
+				14AE6D8C17EAD15800CAAD55 /* CLJUtil.m in Sources */,
+				14B134C917F1909A0032A943 /* NSString+CLJILookup.m in Sources */,
+				14B134D717F206610032A943 /* CLJPersistentHashMapArrayNode.m in Sources */,
+				14AE6D8417EAC73400CAAD55 /* CLJRT.m in Sources */,
+				14AE6D8817EACA7800CAAD55 /* CLJSymbol.m in Sources */,
+				14B134DA17F2093A0032A943 /* CLJPersistentHashMapBitmapIndexNode.m in Sources */,
+				146C7BE017FBF1ED000FCBEA /* CLJPersistentVectorNode.m in Sources */,
+				14AE6D7917EA35ED00CAAD55 /* CLJAPersistentMap.m in Sources */,
+				14AE6D7D17EA364400CAAD55 /* CLJPersistentHashMap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +712,7 @@
 				14AE6D5B17E8415A00CAAD55 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		14AE6D5C17E8415A00CAAD55 /* Build configuration list for PBXNativeTarget "Clojure LangTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +721,7 @@
 				14AE6D5E17E8415A00CAAD55 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
