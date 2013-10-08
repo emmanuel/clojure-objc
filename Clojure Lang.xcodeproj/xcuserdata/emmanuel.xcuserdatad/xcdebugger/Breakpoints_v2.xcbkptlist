@@ -21,11 +21,11 @@
             condition = "self.count &gt; 1056"
             continueAfterRunningActions = "No"
             filePath = "Clojure Lang/CLJPersistentVector.m"
-            timestampString = "402883326.016195"
+            timestampString = "402914323.693592"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "-cons:"
             landmarkType = "5">
          </BreakpointContent>
@@ -38,46 +38,12 @@
             condition = "parent.array.count != subIndex"
             continueAfterRunningActions = "No"
             filePath = "Clojure Lang/CLJPersistentVector.m"
-            timestampString = "402883326.016195"
+            timestampString = "402914323.693592"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
             landmarkName = "-pushTailNode:withParent:level:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            condition = "newRoot == nil"
-            continueAfterRunningActions = "No"
-            filePath = "Clojure Lang/CLJPersistentVector.m"
-            timestampString = "402883326.016195"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
-            landmarkName = "-cons:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            condition = "newRoot == nil"
-            continueAfterRunningActions = "No"
-            filePath = "Clojure Lang/CLJPersistentVector.m"
-            timestampString = "402883326.016195"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
-            landmarkName = "-cons:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -89,11 +55,11 @@
             condition = "nodeToInsert == nil"
             continueAfterRunningActions = "No"
             filePath = "Clojure Lang/CLJPersistentVector.m"
-            timestampString = "402883326.016195"
+            timestampString = "402914323.693592"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "-pushTailNode:withParent:level:"
             landmarkType = "5">
          </BreakpointContent>

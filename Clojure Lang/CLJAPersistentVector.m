@@ -40,9 +40,9 @@
 
 - (id<CLJAssociative>)assocKey:(id)key withValue:(id)val
 {
-    if ([key respondsToSelector:@selector(integerValue)])
+    if ([key respondsToSelector:@selector(unsignedIntegerValue)])
     {
-        return [self assocN:[key integerValue] withObject:val];
+        return [self assocN:[key unsignedIntegerValue] withObject:val];
     }
     else
     {
@@ -54,7 +54,7 @@
 
 - (id)get:(id)key
 {
-    return [self nth:[key integerValue]];
+    return [self nth:[key unsignedIntegerValue]];
 }
 
 - (id)get:(id)key withDefault:(id)notFound
@@ -64,7 +64,7 @@
 
 #pragma mark - CLJIndexed methods
 
-- (id)nth:(NSInteger)index withDefault:(id)notFound
+- (id)nth:(NSUInteger)index withDefault:(id)notFound
 {
     return [self nth:index] ?: notFound;
 }

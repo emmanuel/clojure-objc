@@ -10,7 +10,9 @@
 
 @interface NSArray (ArrayWithChanges)
 
-- (NSArray *)arrayWithIndex:(NSUInteger)index setToObject:(id)object;
-- (NSArray *)arrayWithObject:(id)object atIndex:(NSUInteger)index;
+- (instancetype)arrayWithIndex:(NSUInteger)index setToObject:(id)object;
+- (instancetype)arrayWithObject:(id)object atIndex:(NSUInteger)index;
+
+- (instancetype)arrayByRemovingLastObject;
 
 @end

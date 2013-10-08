@@ -134,29 +134,6 @@
     return [node nodeWithArray:[node.array arrayWithIndex:subIndex setToObject:newObject]];
 }
 
-//- (CLJPersistentVectorNode *)doAssocWithLevel:(NSUInteger)level node:(CLJPersistentVectorNode *)node index:(NSInteger)index object:(id)object;
-//{
-//    CLJPersistentVectorNode *ret = [node nodeWithArray:@[ ]];
-//    NSMutableArray *temp = [node.array mutableCopy];
-//    if (level == 0)
-//    {
-//        [temp replaceObjectAtIndex:(index & kCLJPersistentVectorCurrentLevelMask)
-//                        withObject:object];
-//    }
-//    else
-//    {
-//        NSInteger subIndex = (index >> level) & kCLJPersistentVectorCurrentLevelMask;
-//        CLJPersistentVectorNode *newNode = [self doAssocWithLevel:(level - kCLJPersistentVectorLevelBitPartitionWidth)
-//                                                             node:node.array[subIndex]
-//                                                            index:index
-//                                                           object:object];
-//        [temp replaceObjectAtIndex:subIndex withObject:newNode];
-//    }
-//    ret.array = [NSArray arrayWithArray:temp];
-//
-//    return ret;
-//}
-
 - (CLJPersistentVector *)cons:(id)object
 {
     // TODO: what is this for?
@@ -282,13 +259,11 @@
     // Pop tail
     else if ((self.count - [self tailOff]) > 1)
     {
-        NSArray *newTail = [self.tail subarrayWithRange:NSMakeRange(0, [self.tail count] - 1)];
-
         return [[self class] vectorWithMeta:self.meta
                                       count:(self.count - 1)
                                       shift:self.shift
                                        root:self.root
-                                       tail:newTail];
+                                       tail:[self.tail arrayByRemovingLastObject]];
     }
     // Pop tree
     else
@@ -341,7 +316,7 @@
         else
         {
             CLJPersistentVectorNode *node = self.root;
-            NSInteger subIndex = 0;
+            NSUInteger subIndex = 0;
             for (NSUInteger level = self.shift; level > 0; level -= kCLJPersistentVectorLevelBitPartitionWidth) {
                 subIndex = ((index >> level) & kCLJPersistentVectorCurrentLevelMask);
                 node = [node.array objectAtIndex:subIndex];
@@ -384,18 +359,14 @@
     // pop the tail
     else
     {
-        // TODO: does the order of initialization matter? could do this in one call if not
-        // CLJPersistentVectorNode *ret = [self.root nodeWithArray:@[ ]];
-        // ret.array = [node.array subarrayWithRange:NSMakeRange(0, [node.array count] - 1)];
-        // return ret;
-        return [node nodeWithArray:[node.array subarrayWithRange:NSMakeRange(0, node.array.count - 1)]];
+        return [node nodeWithArray:[node.array arrayByRemovingLastObject]];
     }
 }
 
 
 #pragma mark - CLJIndexed methods
 
-- (id)nth:(NSInteger)index
+- (id)nth:(NSUInteger)index
 {
     NSArray *targetArray = [self arrayForIndex:index];
     return [targetArray objectAtIndex:(index & kCLJPersistentVectorCurrentLevelMask)];

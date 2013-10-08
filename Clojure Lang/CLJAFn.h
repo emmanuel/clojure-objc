@@ -12,9 +12,7 @@
 @interface CLJAFn : NSObject <CLJIFn>
 
 - (id)call;
-
 - (void)run;
-
-- (id)applyTo:(id <CLJISeq>)argumentSeq;
+- (id)applyTo:(id<CLJISeq>)argumentSeq;
 
 @end

@@ -10,16 +10,21 @@
 
 @implementation NSArray (ArrayWithChanges)
 
-- (NSArray *)arrayWithIndex:(NSUInteger)index setToObject:(id)object
+- (instancetype)arrayWithIndex:(NSUInteger)index setToObject:(id)object
 {
     NSMutableArray *temp = [self mutableCopy];
     [temp replaceObjectAtIndex:index withObject:object];
-    return [NSArray arrayWithArray:temp];
+    return [[self class] arrayWithArray:temp];
 }
 
-- (NSArray *)arrayWithObject:(id)object atIndex:(NSUInteger)index
+- (instancetype)arrayWithObject:(id)object atIndex:(NSUInteger)index
 {
     return [self arrayWithIndex:index setToObject:object];
+}
+
+- (instancetype)arrayByRemovingLastObject
+{
+    return [self subarrayWithRange:NSMakeRange(0, [self count] - 1)];
 }
 
 @end

@@ -14,4 +14,9 @@
 
 @interface CLJAPersistentVector : CLJAFn <CLJIObj, CLJIPersistentVector, NSCoding>
 
++ (instancetype)empty;
+
+- (instancetype)cons:(id)object;
+- (instancetype)assocN:(NSUInteger)index withObject:(id)object;
+
 @end
