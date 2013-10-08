@@ -49,6 +49,18 @@
 		14B134DD17F25FA30032A943 /* CLJPersistentHashMapUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134DC17F25FA30032A943 /* CLJPersistentHashMapUtil.m */; };
 		14B134E217F657F50032A943 /* CLJBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134E117F657F50032A943 /* CLJBox.m */; };
 		14B134E517F9DA610032A943 /* CLJPersistentVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134E417F9DA610032A943 /* CLJPersistentVector.m */; };
+		14DAB969180291610031226C /* NSArray+ArrayWithChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DAB968180291610031226C /* NSArray+ArrayWithChanges.m */; };
+		14DAB96B1803E6A50031226C /* CLJNSArray+ArrayWithChangesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DAB96A1803E6A50031226C /* CLJNSArray+ArrayWithChangesTests.m */; };
+		14DAB96C1803EE870031226C /* NSArray+ArrayWithChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DAB968180291610031226C /* NSArray+ArrayWithChanges.m */; };
+		14DAB96D1803EEA80031226C /* NSArray+CLJILookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134CB17F191C50032A943 /* NSArray+CLJILookup.m */; };
+		14DAB96E1803EEA80031226C /* NSArray+CLJIndexed.m in Sources */ = {isa = PBXBuildFile; fileRef = 1456991817F16490000B7CE8 /* NSArray+CLJIndexed.m */; };
+		14DAB96F1803EEA80031226C /* NSArray+CLJSeqable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1456991217F15F38000B7CE8 /* NSArray+CLJSeqable.m */; };
+		14DAB9701803EEA80031226C /* NSDictionary+CLJILookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134C517F18EF20032A943 /* NSDictionary+CLJILookup.m */; };
+		14DAB9711803EEA80031226C /* NSEnumerator+CLJSeqable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1456991517F15FEE000B7CE8 /* NSEnumerator+CLJSeqable.m */; };
+		14DAB9721803EEA80031226C /* NSObject+CLJILookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134CE17F1927F0032A943 /* NSObject+CLJILookup.m */; };
+		14DAB9731803EEA80031226C /* NSString+CLJCounted.m in Sources */ = {isa = PBXBuildFile; fileRef = 143702D617F18B310033F317 /* NSString+CLJCounted.m */; };
+		14DAB9741803EEA80031226C /* NSString+CLJILookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134C817F1909A0032A943 /* NSString+CLJILookup.m */; };
+		14DAB9751803EEA80031226C /* NSString+CLJIndexed.m in Sources */ = {isa = PBXBuildFile; fileRef = 14537A3217F166C4004F8B6B /* NSString+CLJIndexed.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +194,9 @@
 		14B134E117F657F50032A943 /* CLJBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJBox.m; sourceTree = "<group>"; };
 		14B134E317F9DA610032A943 /* CLJPersistentVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJPersistentVector.h; sourceTree = "<group>"; };
 		14B134E417F9DA610032A943 /* CLJPersistentVector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJPersistentVector.m; sourceTree = "<group>"; };
+		14DAB967180291610031226C /* NSArray+ArrayWithChanges.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ArrayWithChanges.h"; sourceTree = "<group>"; };
+		14DAB968180291610031226C /* NSArray+ArrayWithChanges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ArrayWithChanges.m"; sourceTree = "<group>"; };
+		14DAB96A1803E6A50031226C /* CLJNSArray+ArrayWithChangesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLJNSArray+ArrayWithChangesTests.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +226,8 @@
 			isa = PBXGroup;
 			children = (
 				14B134D017F193C20032A943 /* CLJCategories.h */,
+				14DAB967180291610031226C /* NSArray+ArrayWithChanges.h */,
+				14DAB968180291610031226C /* NSArray+ArrayWithChanges.m */,
 				14B134DE17F4340A0032A943 /* NSArray+CLJCounted.h */,
 				14B134CA17F191C50032A943 /* NSArray+CLJILookup.h */,
 				14B134CB17F191C50032A943 /* NSArray+CLJILookup.m */,
@@ -315,6 +332,7 @@
 		14AE6D4F17E8415A00CAAD55 /* Clojure LangTests */ = {
 			isa = PBXGroup;
 			children = (
+				14DAB96A1803E6A50031226C /* CLJNSArray+ArrayWithChangesTests.m */,
 				146C7BE317FC5B48000FCBEA /* CLJPersistentVectorTests.m */,
 				14AE6D5517E8415A00CAAD55 /* Clojure_LangTests.m */,
 				14AE6D5017E8415A00CAAD55 /* Supporting Files */,
@@ -534,6 +552,7 @@
 				14B134C917F1909A0032A943 /* NSString+CLJILookup.m in Sources */,
 				14B134D717F206610032A943 /* CLJPersistentHashMapArrayNode.m in Sources */,
 				14AE6D8417EAC73400CAAD55 /* CLJRT.m in Sources */,
+				14DAB969180291610031226C /* NSArray+ArrayWithChanges.m in Sources */,
 				14AE6D8817EACA7800CAAD55 /* CLJSymbol.m in Sources */,
 				14B134DA17F2093A0032A943 /* CLJPersistentHashMapBitmapIndexNode.m in Sources */,
 				146C7BE017FBF1ED000FCBEA /* CLJPersistentVectorNode.m in Sources */,
@@ -546,8 +565,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14DAB96F1803EEA80031226C /* NSArray+CLJSeqable.m in Sources */,
+				14DAB96E1803EEA80031226C /* NSArray+CLJIndexed.m in Sources */,
+				14DAB9731803EEA80031226C /* NSString+CLJCounted.m in Sources */,
+				14DAB9701803EEA80031226C /* NSDictionary+CLJILookup.m in Sources */,
+				14DAB96C1803EE870031226C /* NSArray+ArrayWithChanges.m in Sources */,
 				14AE6D5617E8415A00CAAD55 /* Clojure_LangTests.m in Sources */,
+				14DAB9721803EEA80031226C /* NSObject+CLJILookup.m in Sources */,
+				14DAB96D1803EEA80031226C /* NSArray+CLJILookup.m in Sources */,
+				14DAB96B1803E6A50031226C /* CLJNSArray+ArrayWithChangesTests.m in Sources */,
+				14DAB9751803EEA80031226C /* NSString+CLJIndexed.m in Sources */,
 				146C7BE417FC5B48000FCBEA /* CLJPersistentVectorTests.m in Sources */,
+				14DAB9711803EEA80031226C /* NSEnumerator+CLJSeqable.m in Sources */,
+				14DAB9741803EEA80031226C /* NSString+CLJILookup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

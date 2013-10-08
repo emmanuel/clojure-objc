@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Emmanuel Gomez. All rights reserved.
 //
 
+#import "NSArray+ArrayWithChanges.h"
 #import "NSArray+CLJCounted.h"
 #import "NSArray+CLJILookup.h"
 #import "NSArray+CLJIndexed.h"

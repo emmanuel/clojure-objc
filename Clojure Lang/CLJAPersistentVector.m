@@ -25,7 +25,7 @@
     return [self count];
 }
 
-- (instancetype)assocN:(NSInteger)i withObject:(id)object
+- (instancetype)assocN:(NSUInteger)i withObject:(id)object
 {
     return nil;
 }

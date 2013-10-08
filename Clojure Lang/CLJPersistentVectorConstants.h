@@ -8,4 +8,6 @@
 
 static const NSInteger kCLJPersistentVectorLevelBitPartitionWidth = 5;
 static const NSInteger kCLJPersistentVectorCurrentLevelMask = 0x01f;
-static const NSInteger kCLJPersistentVectorBranchingFactor = 2 ^ kCLJPersistentVectorLevelBitPartitionWidth;
+// TODO: derive kCLJPersistentVectorBranchingFactor from kCLJPersistentVectorLevelBitPartitionWidth:
+// kCLJPersistentVectorBranchingFactor = 2 ^ kCLJPersistentVectorLevelBitPartitionWidth;
+static const NSInteger kCLJPersistentVectorBranchingFactor = 32;

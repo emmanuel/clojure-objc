@@ -15,10 +15,11 @@
 @interface CLJPersistentVector : CLJAPersistentVector
 
 + (instancetype)empty;
-+ (instancetype)vectorWithMeta:(id<CLJIPersistentMap>)meta count:(NSInteger)count shift:(NSInteger)shift root:(CLJPersistentVectorNode *)root tail:(NSArray *)tail;
++ (instancetype)vectorWithMeta:(id<CLJIPersistentMap>)meta count:(NSUInteger)count shift:(NSUInteger)shift root:(CLJPersistentVectorNode *)root tail:(NSArray *)tail;
 
-- (instancetype)initWithMeta:(id<CLJIPersistentMap>)meta count:(NSInteger)count shift:(NSInteger)shift root:(CLJPersistentVectorNode *)root tail:(NSArray *)tail;
+- (instancetype)initWithMeta:(id<CLJIPersistentMap>)meta count:(NSUInteger)count shift:(NSUInteger)shift root:(CLJPersistentVectorNode *)root tail:(NSArray *)tail;
 
 - (CLJPersistentVector *)cons:(id)object;
+- (CLJPersistentVector *)assocN:(NSUInteger)index withObject:(id)object;
 
 @end

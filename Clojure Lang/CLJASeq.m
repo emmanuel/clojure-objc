@@ -53,7 +53,7 @@
 
     id<CLJISeq> ms = [object seq];
     for (id<CLJISeq> s = [self seq]; nil != s; s = [s next], ms = [ms next]) {
-        if (nil == ms || CLJUtil_equal([s first], [ms first]))
+        if (nil == ms) // || CLJUtil_equal([s first], [ms first]))
         {
             return NO;
         }
@@ -104,7 +104,7 @@
 	id<CLJISeq> ms = [object seq];
 	for(id<CLJISeq> s = [self seq]; s != nil; s = [s next], ms = [ms next])
     {
-		if (nil == ms || !CLJUtil_equiv([s first], [ms first]))
+		if (nil == ms) // || !CLJUtil_equiv([s first], [ms first]))
         {
 			return false;
         }
@@ -121,7 +121,7 @@
     {
         NSUInteger hash = 1;
         for (id<CLJISeq> s = [self seq]; nil != s; s = [s next]) {
-            hash = 31 * hash + CLJUtil_hasheq([s first]);
+            hash = 31 * hash; // + CLJUtil_hasheq([s first]);
         }
         _hasheq = hash;
     }

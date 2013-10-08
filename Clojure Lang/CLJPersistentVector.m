@@ -8,6 +8,7 @@
 
 #import "CLJPersistentVector.h"
 #import "CLJPersistentVectorNode.h"
+#import "NSArray+ArrayWithChanges.h"
 
 
 @interface CLJPersistentVector ()
@@ -70,22 +71,23 @@
     return [[self class] vectorWithMeta:meta count:self.count shift:self.shift root:self.root tail:self.tail];
 }
 
-- (instancetype)assocN:(NSInteger)index withObject:(id)object
+- (instancetype)assocN:(NSUInteger)index withObject:(id)object
 {
-    if ((index >= 0) && (index < self.count))
+    // when using NSInteger:
+    // if ((index >= 0) && (index < self.count))
+    if (index < self.count)
     {
-        if (index > [self tailOff])
+        // in tail
+        if (index >= [self tailOff])
         {
-            NSMutableArray *newTail = [self.tail mutableCopy];
-            [newTail replaceObjectAtIndex:(index & kCLJPersistentVectorCurrentLevelMask)
-                               withObject:object];
-
+            NSUInteger subIndex = index & kCLJPersistentVectorCurrentLevelMask;
             return [[self class] vectorWithMeta:self.meta
                                           count:self.count
                                           shift:self.shift
                                            root:self.root
-                                           tail:[NSArray arrayWithArray:newTail]];
+                                           tail:[self.tail arrayWithIndex:subIndex setToObject:object]];
         }
+        // in tree
         else
         {
             return [[self class] vectorWithMeta:self.meta
@@ -112,26 +114,48 @@
 
 - (CLJPersistentVectorNode *)doAssocWithLevel:(NSUInteger)level node:(CLJPersistentVectorNode *)node index:(NSInteger)index object:(id)object;
 {
-    CLJPersistentVectorNode *ret = [node nodeWithArray:@[ ]];
-    NSMutableArray *temp = [node.array mutableCopy];
+    NSUInteger subIndex = NSUIntegerMax;
+    id newObject = nil;
+
     if (level == 0)
     {
-        [temp replaceObjectAtIndex:(index & kCLJPersistentVectorCurrentLevelMask)
-                        withObject:object];
+        subIndex = index & kCLJPersistentVectorCurrentLevelMask;
+        newObject = object;
     }
     else
     {
-        NSInteger subIndex = (index >> level) & kCLJPersistentVectorCurrentLevelMask;
-        CLJPersistentVectorNode *newNode = [self doAssocWithLevel:(level - kCLJPersistentVectorLevelBitPartitionWidth)
-                                                             node:node.array[subIndex]
-                                                            index:index
-                                                           object:object];
-        [temp replaceObjectAtIndex:subIndex withObject:newNode];
+        subIndex = (index >> level) & kCLJPersistentVectorCurrentLevelMask;
+        newObject = [self doAssocWithLevel:(level - kCLJPersistentVectorLevelBitPartitionWidth)
+                                      node:node.array[subIndex]
+                                     index:index
+                                    object:object];
     }
-    ret.array = [NSArray arrayWithArray:temp];
 
-    return ret;
+    return [node nodeWithArray:[node.array arrayWithIndex:subIndex setToObject:newObject]];
 }
+
+//- (CLJPersistentVectorNode *)doAssocWithLevel:(NSUInteger)level node:(CLJPersistentVectorNode *)node index:(NSInteger)index object:(id)object;
+//{
+//    CLJPersistentVectorNode *ret = [node nodeWithArray:@[ ]];
+//    NSMutableArray *temp = [node.array mutableCopy];
+//    if (level == 0)
+//    {
+//        [temp replaceObjectAtIndex:(index & kCLJPersistentVectorCurrentLevelMask)
+//                        withObject:object];
+//    }
+//    else
+//    {
+//        NSInteger subIndex = (index >> level) & kCLJPersistentVectorCurrentLevelMask;
+//        CLJPersistentVectorNode *newNode = [self doAssocWithLevel:(level - kCLJPersistentVectorLevelBitPartitionWidth)
+//                                                             node:node.array[subIndex]
+//                                                            index:index
+//                                                           object:object];
+//        [temp replaceObjectAtIndex:subIndex withObject:newNode];
+//    }
+//    ret.array = [NSArray arrayWithArray:temp];
+//
+//    return ret;
+//}
 
 - (CLJPersistentVector *)cons:(id)object
 {
@@ -150,30 +174,31 @@
     // Full tail, push into tree
     else
     {
-        CLJPersistentVectorNode *newRoot;
+        CLJPersistentVectorNode *newRoot = nil;
         CLJPersistentVectorNode *tailNode = [self.root nodeWithArray:self.tail];
         NSUInteger newShift = self.shift;
 
         // overflow root?
         if ((self.count >> kCLJPersistentVectorLevelBitPartitionWidth) > (1 << self.shift))
         {
-            CLJPersistentVectorNode *newRoot = [self.root nodeWithArray:@[ ]];
-            CLJPersistentVectorNode *pathFromRootToTailNode = [self nodeWithWithPathToNode:tailNode
+            newRoot = [self.root nodeWithArray:@[ ]];
+            CLJPersistentVectorNode *nodeWithPathToTailNode = [self nodeWithWithPathToNode:tailNode
                                                                                 editThread:self.root.editThread
                                                                                      level:self.shift];
-            newRoot.array = @[ self.root, pathFromRootToTailNode ];
+            newRoot.array = @[ self.root, nodeWithPathToTailNode ];
             newShift += kCLJPersistentVectorLevelBitPartitionWidth;
         }
         else
         {
-            newRoot = [self pushTailWithLevel:self.shift parent:self.root tailNode:tailNode];
+            newRoot = [self pushTailNode:tailNode withParent:self.root level:self.shift];
+            if (newRoot == nil) NSLog(@"pushTailNode:withParent:level: returned a nil node: %@", self);
         }
         
-        return [CLJPersistentVector vectorWithMeta:self.meta
-                                             count:(self.count + 1)
-                                             shift:newShift
-                                              root:newRoot
-                                              tail:@[ object ]];
+        return [[self class] vectorWithMeta:self.meta
+                                      count:(self.count + 1)
+                                      shift:newShift
+                                       root:newRoot
+                                       tail:@[ object ]];
     }
 }
 
@@ -187,7 +212,9 @@
     }
     else
     {
-        // temp variable is in source... does order of init matter? (eager evaluation would have the outer node allocated last without the explicit preceding init
+        // temp variable is in source... does order of init matter?
+        // (eager evaluation would have the outer node allocated last without the explicit preceding init
+        // CLJPersistentVectorNode *ret = [targetNode nodeWithArray:@[ ]];
         CLJPersistentVectorNode *ret = [CLJPersistentVectorNode nodeWithEditThread:editThread
                                                                              array:@[ ]];
         CLJPersistentVectorNode *firstEntry = [self nodeWithWithPathToNode:targetNode
@@ -198,9 +225,10 @@
     }
 }
 
-- (CLJPersistentVectorNode *)pushTailWithLevel:(NSUInteger)level
-                                        parent:(CLJPersistentVectorNode *)parent
-                                      tailNode:(CLJPersistentVectorNode *)tailNode
+- (CLJPersistentVectorNode *)pushTailNode:(CLJPersistentVectorNode *)tailNode
+                               withParent:(CLJPersistentVectorNode *)parent
+                                    level:(NSUInteger)level
+
 {
     //if parent is leaf, insert node,
 	// else does it map to an existing child? -> nodeToInsert = pushNode one more level
@@ -215,28 +243,29 @@
     }
     else
     {
-        CLJPersistentVectorNode *child;
         CLJPersistentVectorNode *nodeToInsert;
         // CLJPersistentVectorNode *child = [parent.array objectAtIndex:subIndex];
         // if (child != nil)
         if (subIndex < [parent.array count])
         {
-            child = [parent.array objectAtIndex:subIndex];
-            nodeToInsert = [self pushTailWithLevel:(level - kCLJPersistentVectorLevelBitPartitionWidth)
-                                            parent:child
-                                          tailNode:tailNode];
+            CLJPersistentVectorNode *child = [parent.array objectAtIndex:subIndex];
+            nodeToInsert = [self pushTailNode:tailNode withParent:child level:(level - kCLJPersistentVectorLevelBitPartitionWidth)];
+            if (nodeToInsert == nil) NSLog(@"got nil node from pushTailNode:withParent:level:, vec: %@", self);
         }
         else
         {
             nodeToInsert = [self nodeWithWithPathToNode:tailNode
                                              editThread:self.root.editThread
                                                   level:(level - kCLJPersistentVectorLevelBitPartitionWidth)];
+            if (nodeToInsert == nil) NSLog(@"got nil node from nodeWithPathToNode, vec: %@", self);
         }
     }
-    NSMutableArray *temp = [parent.array mutableCopy];
-    [temp replaceObjectAtIndex:subIndex withObject:nodeToInsert];
-    ret.array = [NSArray arrayWithArray:temp];
-    
+    // NSMutableArray *temp = [parent.array mutableCopy];
+    // temp[subIndex] = nodeToInsert;
+    // [temp setObject:nodeToInsert atIndexedSubscript:subIndex];
+    // ret.array = [NSArray arrayWithArray:temp];
+    ret.array = [parent.array arrayByAddingObject:nodeToInsert];
+
     return ret;
 }
 
@@ -344,11 +373,7 @@
         // new intermediary node on path
         else
         {
-            CLJPersistentVectorNode *ret = [self.root nodeWithArray:@[ ]];
-            NSMutableArray *temp = [node.array mutableCopy];
-            [temp replaceObjectAtIndex:subIndex withObject:newChild];
-            ret.array = [NSArray arrayWithArray:temp];
-            return ret;
+            return [node nodeWithArray:[node.array arrayWithIndex:subIndex setToObject:newChild]];
         }
     }
     // level is beyond current tree depth
@@ -360,10 +385,10 @@
     else
     {
         // TODO: does the order of initialization matter? could do this in one call if not
-        CLJPersistentVectorNode *ret = [self.root nodeWithArray:@[ ]];
-        ret.array = [node.array subarrayWithRange:NSMakeRange(0, [node.array count] - 1)];
-
-        return ret;
+        // CLJPersistentVectorNode *ret = [self.root nodeWithArray:@[ ]];
+        // ret.array = [node.array subarrayWithRange:NSMakeRange(0, [node.array count] - 1)];
+        // return ret;
+        return [node nodeWithArray:[node.array subarrayWithRange:NSMakeRange(0, node.array.count - 1)]];
     }
 }
 
