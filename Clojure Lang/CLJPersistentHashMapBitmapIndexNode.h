@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CLJPersistentHashMapINode.h"
+#import "CLJIPersistentHashMapNode.h"
 
-@interface CLJPersistentHashMapBitmapIndexNode : NSObject <CLJPersistentHashMapINode>
+@interface CLJPersistentHashMapBitmapIndexNode : NSObject <CLJIPersistentHashMapNode>
 
 + (instancetype)empty;
++ (instancetype)nodeWithEditThread:(NSThread *)editThread bitmap:(NSUInteger)bitmap array:(NSPointerArray *)array;
 
-- (instancetype)initWithEditThread:(NSThread *)editThread bitmap:(NSInteger)bitmap array:(NSArray *)array;
+- (instancetype)initWithEditThread:(NSThread *)editThread bitmap:(NSUInteger)bitmap array:(NSPointerArray *)array;
 
 @end

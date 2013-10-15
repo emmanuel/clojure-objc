@@ -17,6 +17,6 @@
 + (instancetype)empty;
 
 - (instancetype)cons:(id)object;
-- (instancetype)assocN:(NSUInteger)index withObject:(id)object;
+- (instancetype)assocKey:(id)key withObject:(id)object;
 
 @end

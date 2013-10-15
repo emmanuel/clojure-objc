@@ -24,7 +24,8 @@
 
 - (instancetype)arrayByRemovingLastObject
 {
-    return [self subarrayWithRange:NSMakeRange(0, [self count] - 1)];
+    // return [self subarrayWithRange:NSMakeRange(0, [self count] - 1)];
+    return [self subarrayWithRange:(NSRange){ .location = 0, .length = ([self count] - 1) }];
 }
 
 @end

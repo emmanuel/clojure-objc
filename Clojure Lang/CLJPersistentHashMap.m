@@ -7,18 +7,20 @@
 //
 
 #import "CLJPersistentHashMap.h"
+#import "CLJPersistentHashMapBitmapIndexNode.h"
+#import "CLJBox.h"
 
-@protocol CLJPersistentHashMapINode;
+@protocol CLJIPersistentHashMapNode;
+
 
 
 @interface CLJPersistentHashMap ()
-{
-    NSUInteger _count;
-    id<CLJPersistentHashMapINode> _root;
-    BOOL _hasNil;
-    id _nilValue;
-    id<CLJIPersistentMap> _meta;
-}
+
+@property (nonatomic) NSUInteger count;
+@property (nonatomic, strong) id<CLJIPersistentHashMapNode> root;
+@property (nonatomic) BOOL hasNil;
+@property (nonatomic, strong) id nilValue;
+@property (nonatomic, strong) id<CLJIPersistentMap> meta;
 
 @end
 
@@ -33,70 +35,152 @@
 
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        empty = [[self alloc] initWithCount:0 root:nil hasNilValue:NO nilValue:nil];
+        empty = [[self alloc] initWithMeta:nil count:0 root:nil hasNilValue:NO nilValue:nil];
     });
 
     return empty;
 }
 
++ (id)notFound
+{
+    static id notFound = nil;
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        notFound = [[NSObject alloc] init];
+    });
+
+    return notFound;
+}
+
+#pragma mark - Factory methods
+
++ (instancetype)hashMapWithMeta:(id<CLJIPersistentMap>)meta count:(NSUInteger)count rootNode:(id<CLJIPersistentHashMapNode>)root hasNilValue:(BOOL)hasNilValue nilValue:(id)nilValue
+{
+    return [[self alloc] initWithMeta:meta count:count root:root hasNilValue:hasNilValue nilValue:nilValue];
+}
+
 #pragma mark - Initialization methods
 
-- (instancetype)initWithCount:(NSUInteger)count
-                         root:(id <CLJPersistentHashMapINode>)root
-                  hasNilValue:(BOOL)hasNilValue
-                     nilValue:(id)nilValue
+- (instancetype)initWithMeta:(id<CLJIPersistentMap>)meta count:(NSUInteger)count root:(id<CLJIPersistentHashMapNode>)root hasNilValue:(BOOL)hasNilValue nilValue:(id)nilValue
 {
     if (self = [super init])
     {
-        _count = count;
-        _root = root;
-        _hasNil = hasNilValue;
-        _nilValue = nilValue;
-        _meta = nil;
-    }
-    
-    return self;
-}
-
-- (instancetype)initWithMeta:(id <CLJIPersistentMap>)meta
-                       count:(NSUInteger)count
-                        root:(id <CLJPersistentHashMapINode>)root
-                 hasNilValue:(BOOL)hasNilValue
-                    nilValue:(id)nilValue
-{
-    if (self = [self initWithCount:count
-                              root:root
-                       hasNilValue:hasNilValue
-                          nilValue:nilValue])
-    {
-        _meta = meta;
+        self.meta = meta;
+        self.count = count;
+        self.root = root;
+        self.hasNil = hasNilValue;
+        self.nilValue = nilValue;
     }
 
     return self;
 }
 
-- (id<CLJIPersistentMap>)assocKey:(id)key withValue:(id)value
+#pragma mark - CLJIPersistentMap
+
+- (id<CLJIPersistentMap>)assocKey:(id)key withObject:(id)object
 {
-    return nil;
     if (nil == key)
     {
-        if (_hasNil && (value == _nilValue))
-        {
-			return self;
-        }
-		return [[CLJPersistentHashMap alloc] initWithMeta:_meta
-                                                    count:_count
-                                                     root:_root
-                                              hasNilValue:YES
-                                                 nilValue:value];
-	}
-//	Box addedLeaf = new Box(null);
-//	INode newroot = (root == null ? BitmapIndexedNode.EMPTY : root)
-//    .assoc(0, hash(key), key, val, addedLeaf);
-//	if(newroot == root)
-//		return this;
-//	return new PersistentHashMap(meta(), addedLeaf.val == null ? count : count + 1, newroot, hasNull, nullValue);
+        if (self.hasNil && (self.nilValue == object)) return self;
 
+        return [CLJPersistentHashMap hashMapWithMeta:self.meta
+                                               count:self.count
+                                            rootNode:self.root
+                                         hasNilValue:YES
+                                            nilValue:object];
+	}
+    BOOL addedLeaf = NO;
+    id<CLJIPersistentHashMapNode> newRoot = nil == self.root ? nil : [CLJPersistentHashMapBitmapIndexNode empty];
+    newRoot = [newRoot assocKey:key withObject:object shift:0 hash:0 addedLeaf:&addedLeaf];
+    if (newRoot == self.root) return self;
+    return [CLJPersistentHashMap hashMapWithMeta:self.meta count:(self.count + (addedLeaf ? 1 : 0)) rootNode:newRoot hasNilValue:self.hasNil nilValue:self.nilValue];
+}
+
+- (BOOL)containsKey:(id)key
+{
+    if (nil == key) return self.hasNil;
+    if (nil != self.root)
+    {
+        id notFound = [CLJPersistentHashMap notFound];
+        id found = [self.root findKey:key withShift:0 hash:[key clj_hasheq] notFound:notFound];
+        return notFound != found;
+    }
+    else
+    {
+        return NO;
+    }
 }
 
 @end
+
+//public class PersistentHashMap extends APersistentMap implements IEditableCollection, IObj {
+//
+//
+//    final public static PersistentHashMap EMPTY = new PersistentHashMap(0, null, false, null);
+//    final private static Object NOT_FOUND = new Object();
+//
+//    static public IPersistentMap create(Map other){
+//        ITransientMap ret = EMPTY.asTransient();
+//        for(Object o : other.entrySet())
+//		{
+//            Map.Entry e = (Entry) o;
+//            ret = ret.assoc(e.getKey(), e.getValue());
+//		}
+//        return ret.persistent();
+//    }
+//
+//    /*
+//     * @param init {key1,val1,key2,val2,...}
+//     */
+//    public static PersistentHashMap create(Object... init){
+//        ITransientMap ret = EMPTY.asTransient();
+//        for(int i = 0; i < init.length; i += 2)
+//		{
+//            ret = ret.assoc(init[i], init[i + 1]);
+//		}
+//        return (PersistentHashMap) ret.persistent();
+//    }
+//
+//    public static PersistentHashMap createWithCheck(Object... init){
+//        ITransientMap ret = EMPTY.asTransient();
+//        for(int i = 0; i < init.length; i += 2)
+//		{
+//            ret = ret.assoc(init[i], init[i + 1]);
+//            if(ret.count() != i/2 + 1)
+//                throw new IllegalArgumentException("Duplicate key: " + init[i]);
+//		}
+//        return (PersistentHashMap) ret.persistent();
+//    }
+//
+//    static public PersistentHashMap create(ISeq items){
+//        ITransientMap ret = EMPTY.asTransient();
+//        for(; items != null; items = items.next().next())
+//		{
+//            if(items.next() == null)
+//                throw new IllegalArgumentException(String.format("No value supplied for key: %s", items.first()));
+//            ret = ret.assoc(items.first(), RT.second(items));
+//		}
+//        return (PersistentHashMap) ret.persistent();
+//    }
+//
+//    static public PersistentHashMap createWithCheck(ISeq items){
+//        ITransientMap ret = EMPTY.asTransient();
+//        for(int i=0; items != null; items = items.next().next(), ++i)
+//		{
+//            if(items.next() == null)
+//                throw new IllegalArgumentException(String.format("No value supplied for key: %s", items.first()));
+//            ret = ret.assoc(items.first(), RT.second(items));
+//            if(ret.count() != i + 1)
+//                throw new IllegalArgumentException("Duplicate key: " + items.first());
+//		}
+//        return (PersistentHashMap) ret.persistent();
+//    }
+//
+//    /*
+//     * @param init {key1,val1,key2,val2,...}
+//     */
+//    public static PersistentHashMap create(IPersistentMap meta, Object... init){
+//        return create(init).withMeta(meta);
+//    }
+//

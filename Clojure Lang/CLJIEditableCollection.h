@@ -11,6 +11,6 @@
 
 @protocol CLJIEditableCollection
 
-- (id <CLJITransientCollection>)asTransient;
+- (id<CLJITransientCollection>)asTransient;
 
 @end

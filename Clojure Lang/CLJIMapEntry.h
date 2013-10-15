@@ -12,12 +12,11 @@
 @protocol CLJIMapEntry
 
 - (id)key;
-- (id)val;
-
+- (id)object;
 
 @optional
-- (id)nth:(NSInteger)index;
-- (id)nth:(NSInteger)index withDefault:(id)notFound;
+- (id)nth:(NSUInteger)index;
+- (id)nth:(NSUInteger)index withDefault:(id)notFound;
 
 @end
 
@@ -39,24 +38,24 @@
 }
 
 
-- (id)nth:(NSInteger)index
+- (id)nth:(NSUInteger)index
 {
     switch (index) {
         case 0:
             return [self key];
             break;
         case 1:
-            return [self val];
+            return [self object];
             break;
         default:
             @throw [NSException exceptionWithName:NSRangeException
-                                           reason:[NSString stringWithFormat:@"index (%lu) out of bounds (%i)", index, 1]
+                                           reason:[NSString stringWithFormat:@"index (%lu) out of bounds (%i)", (long)index, 1]
                                          userInfo:nil];
             break;
     }
 }
 
-- (id)nth:(NSInteger)index withDefault:(id)notFound
+- (id)nth:(NSUInteger)index withDefault:(id)notFound
 {
     return [self nth:index] ?: notFound;
 }

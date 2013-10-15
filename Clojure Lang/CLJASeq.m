@@ -14,10 +14,17 @@
 
 @protocol CLJCounted;
 
+
+@interface CLJASeq ()
+
+@property (nonatomic, getter = clj_hasheq) NSUInteger hasheq;
+
+@end
+
+
 @implementation CLJASeq
 {
     NSUInteger _hash;
-    NSUInteger _hasheq;
 }
 
 #pragma mark - Initialization methods
@@ -115,15 +122,16 @@
 
 #pragma mark - CLJIHashEq methods
 
-- (NSUInteger)hasheq
+- (NSUInteger)clj_hasheq
 {
-    if (-1 == _hasheq)
+    if (kCLJIHashEqUninitializedHashValue == _hasheq)
     {
         NSUInteger hash = 1;
-        for (id<CLJISeq> s = [self seq]; nil != s; s = [s next]) {
-            hash = 31 * hash; // + CLJUtil_hasheq([s first]);
+        for (id<CLJISeq> s = [self seq]; nil != s; s = [s next])
+        {
+            hash = 31 * hash + [[s first] clj_hasheq];
         }
-        _hasheq = hash;
+        self.hasheq = hash;
     }
 
     return _hasheq;

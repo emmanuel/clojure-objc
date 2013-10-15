@@ -11,12 +11,21 @@
 @interface CLJAPersistentVector ()
 {
     NSInteger _hash;
-    NSInteger _hasheq;
 }
+
+/// CLJIMeta
+@property (nonatomic) id<CLJIPersistentMap> meta;
+/// CLJIHashEq
+@property (nonatomic, getter = clj_hasheq) NSUInteger hasheq;
 
 @end
 
 @implementation CLJAPersistentVector
+
+- (id<CLJIPersistentMap>)empty
+{
+    return [[[self class] empty] withMeta:self.meta];
+}
 
 #pragma mark - CLJIPersistentVector methods
 
@@ -38,7 +47,7 @@
 
 #pragma mark - CLJAssociative methods
 
-- (id<CLJAssociative>)assocKey:(id)key withValue:(id)val
+- (id<CLJAssociative>)assocKey:(id)key withObject:(id)val
 {
     if ([key respondsToSelector:@selector(unsignedIntegerValue)])
     {

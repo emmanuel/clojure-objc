@@ -90,7 +90,7 @@
 
 #pragma mark - CLJIHashEq methods
 
-- (NSUInteger)hasheq
+- (NSUInteger)clj_hasheq
 {
     return _hash;
 }

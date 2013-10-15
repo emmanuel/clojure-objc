@@ -7,6 +7,7 @@
 //
 
 #import "NSArray+ArrayWithChanges.h"
+
 #import "NSArray+CLJCounted.h"
 #import "NSArray+CLJILookup.h"
 #import "NSArray+CLJIndexed.h"
@@ -17,7 +18,8 @@
 
 #import "NSEnumerator+CLJSeqable.h"
 
-#import "NSObject+CLJIlookup.h"
+#import "NSObject+CLJIHashEq.h"
+#import "NSObject+CLJILookup.h"
 
 #import "NSString+CLJCounted.h"
 #import "NSString+CLJILookup.h"

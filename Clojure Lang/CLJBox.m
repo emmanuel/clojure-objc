@@ -10,4 +10,19 @@
 
 @implementation CLJBox
 
++ (instancetype)boxWithObject:(id)object
+{
+    return [[self alloc] initWithObject:object];
+}
+
+- (instancetype)initWithObject:(id)object
+{
+    if (self = [super init])
+    {
+        self.object = object;
+    }
+
+    return self;
+}
+
 @end

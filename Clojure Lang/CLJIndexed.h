@@ -8,14 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "CLJCounted.h"
-@protocol CLJIndexed;
-#import "NSArray+CLJIndexed.h"
-#import "NSString+CLJIndexed.h"
 
 
 @protocol CLJIndexed <NSObject, CLJCounted>
 
-- (id)nth:(NSInteger)index;
-- (id)nth:(NSInteger)index withDefault:(id)notFound;
+- (id)nth:(NSUInteger)index;
+- (id)nth:(NSUInteger)index withDefault:(id)notFound;
 
 @end

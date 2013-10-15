@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Emmanuel Gomez. All rights reserved.
 //
 
-#import "NSObject+CLJILookup.h"
+#import "NSObject+CLJILookup.m"
 #import "NSString+CLJILookup.h"
 #import "NSString+CLJIndexed.h"
 

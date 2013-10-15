@@ -7,9 +7,17 @@
 //
 
 #import "CLJASeq.h"
+#import "CLJIPersistentList.h"
+#import "CLJCounted.h"
 
-@interface CLJPersistentList : CLJASeq
+@interface CLJPersistentList : CLJASeq <CLJIPersistentList, CLJCounted>
 
-+ (instancetype)empty;
+@property (nonatomic, readonly, strong) id first;
+@property (nonatomic, readonly, strong) id<CLJIPersistentList> rest;
+@property (nonatomic, readonly) NSUInteger count;
+
++ (CLJPersistentList *)empty;
+
+- (CLJPersistentList *)cons:(id)object;
 
 @end

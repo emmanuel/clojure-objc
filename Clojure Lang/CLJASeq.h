@@ -10,20 +10,16 @@
 #import "CLJISeq.h"
 #import "CLJSequential.h"
 #import "CLJIHashEq.h"
-
+#import "CLJIPersistentList.h"
 
 //public abstract class ASeq extends Obj implements ISeq, Sequential, List, Serializable, IHashEq {
 
 @interface CLJASeq : CLJObj <CLJISeq, CLJSequential, NSCoding, CLJIHashEq>
 
 - (id<CLJIPersistentCollection>)empty;
-
 - (BOOL)equiv:(id)obj;
-
 - (id)peek;
-
-- (instancetype)pop;
-
+- (id<CLJIPersistentList>)pop;
 - (id<CLJISeq>)rest;
 
 @end

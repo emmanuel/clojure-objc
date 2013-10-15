@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+
+static const NSUInteger kCLJIHashEqUninitializedHashValue = 0; // NSUIntegerMax; ?
+
+
 @protocol CLJIHashEq
 
-- (NSUInteger)hasheq;
+- (NSUInteger)clj_hasheq;
 
 @end

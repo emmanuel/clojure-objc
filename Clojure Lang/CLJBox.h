@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CLJBox : NSValue
+@interface CLJBox : NSObject
+
+@property (nonatomic, weak) id object;
+
+
++ (instancetype)boxWithObject:(id)object;
+
+- (instancetype)initWithObject:(id)object;
 
 @end

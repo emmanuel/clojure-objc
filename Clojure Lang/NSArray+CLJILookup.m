@@ -8,6 +8,7 @@
 
 #import "NSArray+CLJILookup.h"
 #import "NSArray+CLJIndexed.h"
+#import "NSObject+CLJILookup.m"
 
 @implementation NSArray (CLJILookup)
 
@@ -15,20 +16,12 @@
 {
     if ([key isKindOfClass:[NSNumber class]])
     {
-        NSInteger n = [key integerValue];
+        NSUInteger n = [key unsignedIntegerValue];
         
-        if (0 <= n < [self count])
-        {
-            return [self nth:n];
-        }
+        if (n < [self count]) return [self nth:n];
     }
 
     return nil;
-}
-
-- (id)get:(id)key withDefault:(id)notFound
-{
-    return [self get:key] ?: notFound;
 }
 
 @end

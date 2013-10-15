@@ -10,19 +10,24 @@
 #import "CLJIEditableCollection.h"
 #import "CLJIObj.h"
 
-@protocol CLJPersistentHashMapINode;
+@protocol CLJIPersistentHashMapNode;
 @protocol CLJISeq;
 
 @interface CLJPersistentHashMap : CLJAPersistentMap <CLJIEditableCollection, CLJIObj>
 
 + (instancetype)empty;
++ (id)notFound;
 
 + (instancetype)createWithKeysAndValues:(id)arg, ... NS_REQUIRES_NIL_TERMINATION;
-+ (instancetype)createWithCheckWithKeysAndValues:(id)arg, ... NS_REQUIRES_NIL_TERMINATION;
-+ (instancetype)createWithSeq:(id <CLJISeq>)seq;
-+ (instancetype)createWithCheckWithSeq:(id <CLJISeq>)seq;
++ (instancetype)createAndCheckWithKeysAndValues:(id)arg, ... NS_REQUIRES_NIL_TERMINATION;
++ (instancetype)createWithSeq:(id<CLJISeq>)seq;
++ (instancetype)createAndCheckWithSeq:(id <CLJISeq>)seq;
 
-+ (instancetype)createWithMeta:(id <CLJIPersistentMap>)meta keysAndValues:(id)arg, ... NS_REQUIRES_NIL_TERMINATION;
-+ (instancetype)createWithCheckWithMeta:(id <CLJIPersistentMap>)meta seq:(id <CLJISeq>)seq;
++ (instancetype)createWithMeta:(id<CLJIPersistentMap>)meta keysAndValues:(id)arg, ... NS_REQUIRES_NIL_TERMINATION;
++ (instancetype)createAndCheckWithMeta:(id <CLJIPersistentMap>)meta seq:(id <CLJISeq>)seq;
+
++ (instancetype)hashMapWithMeta:(id<CLJIPersistentMap>)meta count:(NSUInteger)count rootNode:(id<CLJIPersistentHashMapNode>)root hasNilValue:(BOOL)hasNilValue nilValue:(id)nilValue;
+
+- (instancetype)initWithMeta:(id<CLJIPersistentMap>)meta count:(NSUInteger)count rootNode:(id<CLJIPersistentHashMapNode>)root hasNilValue:(BOOL)hasNilValue nilValue:(id)nilValue;
 
 @end

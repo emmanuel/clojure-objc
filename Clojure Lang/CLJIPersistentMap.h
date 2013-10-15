@@ -13,8 +13,8 @@
 // TODO: NSFastEnumeration
 @protocol CLJIPersistentMap <CLJAssociative, CLJCounted>
 
-- (id <CLJIPersistentMap>)assocKey:(id)key withValue:(id)value;
-- (id <CLJIPersistentMap>)assocEx:(id)key withValue:(id)value;
-- (id <CLJIPersistentMap>)without:(id)key;
+- (id<CLJIPersistentMap>)assocKey:(id)key withObject:(id)object;
+- (id<CLJIPersistentMap>)assocEx:(id)key withObject:(id)object;
+- (id<CLJIPersistentMap>)without:(id)key;
 
 @end

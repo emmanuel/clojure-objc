@@ -6,15 +6,15 @@
 //  Copyright (c) 2013 Emmanuel Gomez. All rights reserved.
 //
 
-#import "NSString+CLJCounted.h"
 #import "NSString+CLJIndexed.h"
+#import "NSString+CLJCounted.m"
 
 
 @implementation NSString (CLJIndexed)
 
 - (id)nth:(NSUInteger)index
 {
-    return [self substringWithRange:NSMakeRange(index, 1)];
+    return [self substringWithRange:(NSRange){ .location = index, .length = 1 }];
 }
 
 - (id)nth:(NSUInteger)index withDefault:(id)notFound
