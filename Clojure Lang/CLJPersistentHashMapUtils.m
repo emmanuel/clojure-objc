@@ -23,7 +23,7 @@ AINLINE NSUInteger CLJPersistentHashMapUtil_bitpos(NSUInteger hash, NSUInteger s
 
 AINLINE NSUInteger CLJPersistentHashMapUtil_bitRank(NSUInteger bitmap, NSUInteger bit)
 {
-    return CLJPersistentHashMapUtil_countBitPopulation(bitmap & (bit - 1));
+    return CLJPersistentHashMapUtil_bitPopulation(bitmap & (bit - 1));
 }
 
 AINLINE NSUInteger CLJPersistentHashMapUtil_bitPopulation(NSUInteger bitmap)

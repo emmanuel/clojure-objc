@@ -12,9 +12,8 @@
 
 @interface CLJPersistentHashMapHashCollisionNode : NSObject <CLJIPersistentHashMapNode>
 
-//HashCollisionNode(AtomicReference<Thread> edit, int hash, int count, Object... array){
++ (instancetype)nodeWithEditThread:(CLJAtomicReference *)editThread hash:(NSUInteger)hash count:(NSUInteger)count objects:(NSArray *)objects;
 
-+ (instancetype)nodeWithEditThread:(NSThread *)editThread hash:(NSUInteger)hash count:(NSUInteger)count objects:(NSArray *)objects;
-//+ (instancetype)nodeWithEditThread:(NSThread *)editThread hash:(NSUInteger)hash count:(NSUInteger)count keysAndObjects:(id)object1, ... NS_REQUIRES_NIL_TERMINATION;
+- (instancetype)initWithEditThread:(CLJAtomicReference *)editThread hash:(NSUInteger)hash count:(NSUInteger)count objects:(NSArray *)objects;
 
 @end

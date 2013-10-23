@@ -9,12 +9,15 @@
 #import "CLJSymbol.h"
 #import "CLJUtil.h"
 #import "CLJILookup.h"
+#import "NSString+CLJIntern.h"
 
 @interface CLJSymbol ()
-{
-    NSString *_str;
-    NSUInteger _hash;
-}
+
+@property (nonatomic, strong, readwrite) NSString *ns;
+@property (nonatomic, strong, readwrite) NSString *name;
+@property (nonatomic, strong) NSString *str;
+@property (nonatomic, strong, readwrite) id<CLJIPersistentMap> meta;
+@property (nonatomic) NSUInteger hash;
 
 @end
 
@@ -23,70 +26,71 @@
 
 #pragma mark - Factory methods
 
-+ (instancetype)symbolWithNamespace:(NSString *)namespace name:(NSString *)name
-{
-    return [[self alloc] initWithMeta:nil namespace:namespace name:name];
-}
-
 + (instancetype)symbolWithNamespaceOrName:(NSString *)nsOrName
 {
     NSRange separatorPosition = [nsOrName rangeOfString:@"/"];
+    NSString *ns = nil;
+    NSString *name = nil;
     if ((NSNotFound == separatorPosition.location) || [nsOrName isEqualToString:@"/"])
     {
-        return [[self alloc] initWithMeta:nil namespace:nil name:nsOrName];
+        name = nsOrName;
     }
     else
     {
-        return [[self alloc] initWithMeta:nil
-                                namespace:[nsOrName substringToIndex:separatorPosition.location]
-                                     name:[nsOrName substringFromIndex:NSMaxRange(separatorPosition)]];
+        ns = [nsOrName substringToIndex:separatorPosition.location];
+        name = [nsOrName substringFromIndex:NSMaxRange(separatorPosition)];
     }
+
+    return [[self alloc] initWithMeta:nil namespace:[ns clj_intern] name:[name clj_intern]];
+}
+
++ (instancetype)symbolWithNamespace:(NSString *)ns name:(NSString *)name
+{
+    return [[self alloc] initWithMeta:nil namespace:[ns clj_intern] name:[name clj_intern]];
 }
 
 #pragma mark - Initialization methods
 
-- (instancetype)initWithMeta:(id <CLJIPersistentMap>)meta
-                   namespace:(NSString *)namespace
-                        name:(NSString *)name
+- (instancetype)initWithMeta:(id <CLJIPersistentMap>)meta namespace:(NSString *)nsInterned name:(NSString *)nameInterned
 {
     if (self = [super init])
     {
-        _namespace = namespace;
-        _name = name;
+        _ns = nsInterned;
+        _name = nameInterned;
         _meta = meta;
-        _hash = CLJUtil_hashCombine([name hash], [namespace hash]);
+        _hash = CLJUtil_hashCombine([nameInterned hash], [nsInterned hash]);
+		_str = nil == _ns
+                ? [NSString stringWithFormat:@"%@/%@", _ns, _name]
+                : _name;
     }
 
     return self;
 }
 
+
 #pragma mark - CLJIObj methods
 
 - (id <CLJIObj>)withMeta:(id <CLJIPersistentMap>)meta
 {
-	return [[[self class] alloc] initWithMeta:meta namespace:_name name:_namespace];
+	return [[[self class] alloc] initWithMeta:meta namespace:_ns name:_name];
 }
 
-#pragma mark - Initialization methods
-
-- (NSString *)description
-{
-    if (!_str)
-    {
-		_str = _namespace
-            ? [NSString stringWithFormat:@"%@/%@", _namespace, _name]
-            : _name;
-	}
-
-	return _str;
-}
 
 #pragma mark - NSObject methods
 
-- (NSUInteger)hash
+- (NSString *)description
 {
-    return _hash;
+	return _str;
 }
+
+- (BOOL)isEqual:(id)object
+{
+    if (self == object) return YES;
+    if (![object isKindOfClass:[self class]]) return NO;
+    CLJSymbol *sym = (CLJSymbol *)object;
+    return (_name == sym.name) && (_ns == sym.ns);
+}
+
 
 #pragma mark - CLJIHashEq methods
 

@@ -27,7 +27,7 @@
     [super tearDown];
 }
 
-- (void)testDoesNotBlowUp
+- (void)testArrayWithIndexSetToObjectDoesNotBlowUp
 {
     id firstObject = [[NSObject alloc] init];
     id secondObject = [[NSObject alloc] init];

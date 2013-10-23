@@ -14,7 +14,7 @@
 @class CLJSymbol;
 
 
-@interface CLJKeyword : NSObject <CLJIFn, CLJNamed, CLJIHashEq>
+@interface CLJKeyword : NSObject <CLJIFn, CLJNamed, CLJIHashEq, NSCoding>
 
 @property (nonatomic, readonly) CLJSymbol *sym;
 

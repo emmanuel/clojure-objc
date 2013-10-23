@@ -22,19 +22,17 @@
 #define Clojure_Lang_CLJPersistentHashMapUtils_h
 
 
-static inline NSUInteger CLJPersistentHashMapUtil_hash(id object);
+AINLINE NSUInteger CLJPersistentHashMapUtil_mask(NSUInteger hash, NSUInteger shift);
 
-static inline NSUInteger CLJPersistentHashMapUtil_mask(NSUInteger hash, NSUInteger shift);
+AINLINE NSUInteger CLJPersistentHashMapUtil_bitpos(NSUInteger hash, NSUInteger shift);
 
-static inline NSUInteger CLJPersistentHashMapUtil_bitpos(NSUInteger hash, NSUInteger shift);
+AINLINE NSUInteger CLJPersistentHashMapUtil_bitRank(NSUInteger bitmap, NSUInteger bit);
+AINLINE NSUInteger CLJPersistentHashMapUtil_bitPopulation(NSUInteger bits);
 
-static inline NSUInteger CLJPersistentHashMapUtil_bitRank(NSUInteger bitmap, NSUInteger bit);
-static inline NSUInteger CLJPersistentHashMapUtil_countBitPopulation(NSUInteger bits);
+AINLINE CFTypeRef * const CLJPersistentHashMapArrayNode_cloneAndSet(CFTypeRef *sourceArray, NSUInteger index, id object);
 
-static CFTypeRef * const CLJPersistentHashMapArrayNode_cloneAndSet(CFTypeRef *sourceArray, NSUInteger index, id object);
+AINLINE CFTypeRef * const CLJPersistentHashMapArrayNode_makeNilFilledArray();
 
-static CFTypeRef * const CLJPersistentHashMapArrayNode_makeNilFilledArray();
-
-static CFTypeRef * const CLJPersistentHashMapArrayNode_makeFullSizeNilFilledArray();
+AINLINE CFTypeRef * const CLJPersistentHashMapArrayNode_makeFullSizeNilFilledArray();
 
 #endif

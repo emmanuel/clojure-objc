@@ -10,17 +10,20 @@
 #import "CLJSymbol.h"
 #import "CLJILookup.h"
 #import "CLJRT.h"
+#import <objc/runtime.h>
+
 
 @interface CLJKeyword ()
-{
-    
-}
 
+@property (nonatomic, readwrite) NSUInteger hash;
 @property (nonatomic, readwrite) NSString *str;
 
 @end
 
+
 @implementation CLJKeyword
+
+#pragma mark - Factory methods
 
 + (instancetype)keywordWithSymbol:(CLJSymbol *)symbol
 {
@@ -30,6 +33,19 @@
 + (instancetype)keywordWithNamespaceOrName:(NSString *)namespaceOrName
 {
     return [self keywordWithSymbol:[CLJSymbol symbolWithNamespaceOrName:namespaceOrName]];
+}
+
+#pragma mark - Initialization methods
+
+- (instancetype)initWithSymbol:(CLJSymbol *)symbol
+{
+    if (self = [super init])
+    {
+        _sym = symbol;
+        _hash = [symbol hash] + 0x9e3779b9;
+    }
+
+    return self;
 }
 
 #pragma mark - CLJIFn methods
@@ -44,6 +60,7 @@
 - (id)invoke:(id)arg
 {
     return [arg get:self];
+    IMP foo = imp_implementationWithBlock(^{ @"foo"; });
 }
 
 //- (id)invokeWithArgs:(id)arg1, ...

@@ -10,7 +10,7 @@
 
 @protocol CLJNamed
 
-@property (nonatomic, readonly) NSString *namespace;
-@property (nonatomic, readonly) NSString *name;
+@property (nonatomic, strong, readonly) NSString *ns;
+@property (nonatomic, strong, readonly) NSString *name;
 
 @end

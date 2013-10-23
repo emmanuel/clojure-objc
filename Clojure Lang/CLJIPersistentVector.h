@@ -17,6 +17,7 @@
 @protocol CLJIPersistentVector <NSObject, CLJAssociative, CLJSequential, CLJIPersistentStack, CLJReversible, CLJIndexed>
 
 - (NSInteger)length;
+- (id<CLJIPersistentVector>)assocN:(NSUInteger)i withObject:(id)object;
 - (id<CLJIPersistentVector>)assocKey:(id)key withObject:(id)object;
 - (id<CLJIPersistentVector>)cons:(id)object;
 

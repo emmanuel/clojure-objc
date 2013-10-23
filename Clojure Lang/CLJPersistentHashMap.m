@@ -8,7 +8,8 @@
 
 #import "CLJPersistentHashMap.h"
 #import "CLJPersistentHashMapBitmapIndexNode.h"
-#import "CLJBox.h"
+#import "CLJMapEntry.h"
+#import "CLJPersistentHashMapUtils.h"
 
 @protocol CLJIPersistentHashMapNode;
 
@@ -103,7 +104,7 @@
     if (nil != self.root)
     {
         id notFound = [CLJPersistentHashMap notFound];
-        id found = [self.root findKey:key withShift:0 hash:[key clj_hasheq] notFound:notFound];
+        id found = [self.root findKey:key shift:0 hash:[key clj_hasheq] notFound:notFound];
         return notFound != found;
     }
     else
@@ -112,75 +113,15 @@
     }
 }
 
-@end
+//public IMapEntry entryAt(Object key){
+//	if(key == null)
+//		return hasNull ? new MapEntry(null, nullValue) : null;
+//	return (root != null) ? root.find(0, hash(key), key) : null;
+//}
+- (id<CLJIMapEntry>)entryAt:(id)key
+{
+    if (nil == key) return self.hasNil ? [CLJMapEntry mapEntryWithKey:nil object:self.nilValue] : nil;
+    return (nil != self.root) ? [self.root findKey:key shift:0 hash:[key clj_hasheq]] : nil;
+}
 
-//public class PersistentHashMap extends APersistentMap implements IEditableCollection, IObj {
-//
-//
-//    final public static PersistentHashMap EMPTY = new PersistentHashMap(0, null, false, null);
-//    final private static Object NOT_FOUND = new Object();
-//
-//    static public IPersistentMap create(Map other){
-//        ITransientMap ret = EMPTY.asTransient();
-//        for(Object o : other.entrySet())
-//		{
-//            Map.Entry e = (Entry) o;
-//            ret = ret.assoc(e.getKey(), e.getValue());
-//		}
-//        return ret.persistent();
-//    }
-//
-//    /*
-//     * @param init {key1,val1,key2,val2,...}
-//     */
-//    public static PersistentHashMap create(Object... init){
-//        ITransientMap ret = EMPTY.asTransient();
-//        for(int i = 0; i < init.length; i += 2)
-//		{
-//            ret = ret.assoc(init[i], init[i + 1]);
-//		}
-//        return (PersistentHashMap) ret.persistent();
-//    }
-//
-//    public static PersistentHashMap createWithCheck(Object... init){
-//        ITransientMap ret = EMPTY.asTransient();
-//        for(int i = 0; i < init.length; i += 2)
-//		{
-//            ret = ret.assoc(init[i], init[i + 1]);
-//            if(ret.count() != i/2 + 1)
-//                throw new IllegalArgumentException("Duplicate key: " + init[i]);
-//		}
-//        return (PersistentHashMap) ret.persistent();
-//    }
-//
-//    static public PersistentHashMap create(ISeq items){
-//        ITransientMap ret = EMPTY.asTransient();
-//        for(; items != null; items = items.next().next())
-//		{
-//            if(items.next() == null)
-//                throw new IllegalArgumentException(String.format("No value supplied for key: %s", items.first()));
-//            ret = ret.assoc(items.first(), RT.second(items));
-//		}
-//        return (PersistentHashMap) ret.persistent();
-//    }
-//
-//    static public PersistentHashMap createWithCheck(ISeq items){
-//        ITransientMap ret = EMPTY.asTransient();
-//        for(int i=0; items != null; items = items.next().next(), ++i)
-//		{
-//            if(items.next() == null)
-//                throw new IllegalArgumentException(String.format("No value supplied for key: %s", items.first()));
-//            ret = ret.assoc(items.first(), RT.second(items));
-//            if(ret.count() != i + 1)
-//                throw new IllegalArgumentException("Duplicate key: " + items.first());
-//		}
-//        return (PersistentHashMap) ret.persistent();
-//    }
-//
-//    /*
-//     * @param init {key1,val1,key2,val2,...}
-//     */
-//    public static PersistentHashMap create(IPersistentMap meta, Object... init){
-//        return create(init).withMeta(meta);
-//    }
-//
+@end

@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 Emmanuel Gomez. All rights reserved.
 //
 
-static inline NSUInteger CLJUtil_hash(id obj);
-static inline NSUInteger CLJUtil_hasheq(id obj);
+AINLINE NSUInteger CLJUtil_hash(id obj);
+AINLINE NSUInteger CLJUtil_hasheq(id obj);
 
-static inline NSUInteger CLJUtil_hashCombine(NSUInteger seed, NSUInteger hash);
+AINLINE NSUInteger CLJUtil_hashCombine(NSUInteger seed, NSUInteger hash);
 
-static inline BOOL CLJUtil_equal(id obj1, id obj2);
+AINLINE BOOL CLJUtil_equal(id obj1, id obj2);
 
-static inline BOOL CLJUtil_equiv(id obj1, id obj2);
+AINLINE BOOL CLJUtil_equiv(id obj1, id obj2);
 

@@ -8,6 +8,9 @@
 
 #import "CLJASeq.h"
 
-@interface CLJCons : CLJASeq
+@interface CLJCons : CLJASeq // <NSCoding>
+
++ (instancetype)consWithMeta:(id<CLJIPersistentMap>)meta first:(id)first more:(id<CLJISeq>)more;
++ (instancetype)consWithFirst:(id)first more:(id<CLJISeq>)more;
 
 @end

@@ -12,8 +12,8 @@
 
 @interface CLJPersistentHashMapArrayNode : NSObject <CLJIPersistentHashMapNode>
 
-+ (instancetype)nodeWithEditThread:(NSThread *)editThread count:(NSUInteger)count array:(NSPointerArray *)array;
++ (instancetype)nodeWithEditThread:(CLJAtomicReference *)editThread count:(NSUInteger)count array:(NSPointerArray *)array;
 
-- (instancetype)initWithEditThread:(NSThread *)editThread count:(NSUInteger)count array:(NSPointerArray *)array;
+- (instancetype)initWithEditThread:(CLJAtomicReference *)editThread count:(NSUInteger)count array:(NSPointerArray *)array;
 
 @end

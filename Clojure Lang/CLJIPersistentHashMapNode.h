@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CLJIMapEntry.h"
+#import "CLJAtomicReference.h"
 #import "CLJISeq.h"
 #import "CLJIFn.h"
 #import "CLJBox.h"
@@ -16,13 +17,13 @@
 @protocol CLJIPersistentHashMapNode <NSCoding>
 
 - (id<CLJIPersistentHashMapNode>)assocKey:(id)key withObject:(id)object shift:(NSUInteger)shift hash:(NSUInteger)hash addedLeaf:(BOOL *)addedLeaf;
-- (id<CLJIPersistentHashMapNode>)assocKey:(id)key withObject:(id)object editThread:(NSThread *)edit shift:(NSUInteger)shift hash:(NSUInteger)hash addedLeaf:(BOOL *)addedLeaf;
+- (id<CLJIPersistentHashMapNode>)assocKey:(id)key withObject:(id)object editThread:(CLJAtomicReference *)edit shift:(NSUInteger)shift hash:(NSUInteger)hash addedLeaf:(BOOL *)addedLeaf;
 
-- (id<CLJIPersistentHashMapNode>)withoutKey:(id)key withShift:(NSUInteger)shift hash:(NSUInteger)hash;
-- (id<CLJIPersistentHashMapNode>)withoutKey:(id)key withEditThread:(NSThread *)edit shift:(NSUInteger)shift hash:(NSUInteger)hash removedLeaf:(BOOL *)removedLeaf;
+- (id<CLJIPersistentHashMapNode>)withoutKey:(id)key shift:(NSUInteger)shift hash:(NSUInteger)hash;
+- (id<CLJIPersistentHashMapNode>)withoutKey:(id)key editThread:(CLJAtomicReference *)edit shift:(NSUInteger)shift hash:(NSUInteger)hash removedLeaf:(BOOL *)removedLeaf;
 
-- (id<CLJIMapEntry>)findKey:(id)key withShift:(NSUInteger)shift hash:(NSUInteger)hash;
-- (id)findKey:(id)key withShift:(NSUInteger)shift hash:(NSUInteger)hash notFound:(id)notFound;
+- (id<CLJIMapEntry>)findKey:(id)key shift:(NSUInteger)shift hash:(NSUInteger)hash;
+- (id)findKey:(id)key shift:(NSUInteger)shift hash:(NSUInteger)hash notFound:(id)notFound;
 
 - (id<CLJISeq>)nodeSeq;
 

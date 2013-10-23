@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14090C151817AE30000ED126 /* CLJPersistentHashMapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14090C141817AE30000ED126 /* CLJPersistentHashMapTests.m */; };
 		140D552C180C3A6A00470C66 /* CLJPersistentHashMapHashCollisionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 140D552B180C3A6A00470C66 /* CLJPersistentHashMapHashCollisionNode.m */; };
 		143702D717F18B310033F317 /* NSString+CLJCounted.m in Sources */ = {isa = PBXBuildFile; fileRef = 143702D617F18B310033F317 /* NSString+CLJCounted.m */; };
 		14537A3317F166C4004F8B6B /* NSString+CLJIndexed.m in Sources */ = {isa = PBXBuildFile; fileRef = 14537A3217F166C4004F8B6B /* NSString+CLJIndexed.m */; };
@@ -66,6 +67,9 @@
 		14DAB97F180931EA0031226C /* NSObject+CLJIHashEq.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DAB97E180931EA0031226C /* NSObject+CLJIHashEq.m */; };
 		14DB1469180D369900BD4AB2 /* CLJAMapEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DB1468180D369900BD4AB2 /* CLJAMapEntry.m */; };
 		14DB146C180D36F900BD4AB2 /* CLJMapEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DB146B180D36F900BD4AB2 /* CLJMapEntry.m */; };
+		14DB146F180E73BC00BD4AB2 /* CLJAtomicReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DB146E180E73BC00BD4AB2 /* CLJAtomicReference.m */; };
+		14F06D8F180FA8AC00583079 /* NSString+CLJIntern.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F06D8E180FA8AC00583079 /* NSString+CLJIntern.m */; };
+		14F06D921810A50E00583079 /* CLJAReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F06D911810A50E00583079 /* CLJAReference.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +96,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		14090C141817AE30000ED126 /* CLJPersistentHashMapTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJPersistentHashMapTests.m; sourceTree = "<group>"; };
 		140D552A180C3A6A00470C66 /* CLJPersistentHashMapHashCollisionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJPersistentHashMapHashCollisionNode.h; sourceTree = "<group>"; };
 		140D552B180C3A6A00470C66 /* CLJPersistentHashMapHashCollisionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJPersistentHashMapHashCollisionNode.m; sourceTree = "<group>"; };
 		143702D517F18B310033F317 /* NSString+CLJCounted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CLJCounted.h"; sourceTree = "<group>"; };
@@ -213,6 +218,12 @@
 		14DB1468180D369900BD4AB2 /* CLJAMapEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJAMapEntry.m; sourceTree = "<group>"; };
 		14DB146A180D36F900BD4AB2 /* CLJMapEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJMapEntry.h; sourceTree = "<group>"; };
 		14DB146B180D36F900BD4AB2 /* CLJMapEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJMapEntry.m; sourceTree = "<group>"; };
+		14DB146D180E73BC00BD4AB2 /* CLJAtomicReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJAtomicReference.h; sourceTree = "<group>"; };
+		14DB146E180E73BC00BD4AB2 /* CLJAtomicReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJAtomicReference.m; sourceTree = "<group>"; };
+		14F06D8D180FA8AC00583079 /* NSString+CLJIntern.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CLJIntern.h"; sourceTree = "<group>"; };
+		14F06D8E180FA8AC00583079 /* NSString+CLJIntern.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CLJIntern.m"; sourceTree = "<group>"; };
+		14F06D901810A50E00583079 /* CLJAReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJAReference.h; sourceTree = "<group>"; };
+		14F06D911810A50E00583079 /* CLJAReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJAReference.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,6 +279,8 @@
 				14B134C817F1909A0032A943 /* NSString+CLJILookup.m */,
 				14537A3117F166C4004F8B6B /* NSString+CLJIndexed.h */,
 				14537A3217F166C4004F8B6B /* NSString+CLJIndexed.m */,
+				14F06D8D180FA8AC00583079 /* NSString+CLJIntern.h */,
+				14F06D8E180FA8AC00583079 /* NSString+CLJIntern.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -359,6 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				14DAB96A1803E6A50031226C /* CLJNSArray+ArrayWithChangesTests.m */,
+				14090C141817AE30000ED126 /* CLJPersistentHashMapTests.m */,
 				146C7BE317FC5B48000FCBEA /* CLJPersistentVectorTests.m */,
 				14AE6D5517E8415A00CAAD55 /* Clojure_LangTests.m */,
 				14AE6D5017E8415A00CAAD55 /* Supporting Files */,
@@ -423,6 +437,8 @@
 				14AE6D7817EA35ED00CAAD55 /* CLJAPersistentMap.m */,
 				14AE6D6E17EA308300CAAD55 /* CLJAPersistentVector.h */,
 				14AE6D6F17EA308300CAAD55 /* CLJAPersistentVector.m */,
+				14F06D901810A50E00583079 /* CLJAReference.h */,
+				14F06D911810A50E00583079 /* CLJAReference.m */,
 				14AE6D9017EAF0D400CAAD55 /* CLJASeq.h */,
 				14AE6D9117EAF0D400CAAD55 /* CLJASeq.m */,
 				14AE6D8D17EAEF4100CAAD55 /* CLJObj.h */,
@@ -436,6 +452,8 @@
 			children = (
 				14AE6D9A17EB0CEF00CAAD55 /* CLJArraySeq.h */,
 				14AE6D9B17EB0CEF00CAAD55 /* CLJArraySeq.m */,
+				14DB146D180E73BC00BD4AB2 /* CLJAtomicReference.h */,
+				14DB146E180E73BC00BD4AB2 /* CLJAtomicReference.m */,
 				14B134E017F657F50032A943 /* CLJBox.h */,
 				14B134E117F657F50032A943 /* CLJBox.m */,
 				14AE6D9E17ECD6AD00CAAD55 /* CLJCons.h */,
@@ -579,6 +597,8 @@
 				1456991617F15FEE000B7CE8 /* NSEnumerator+CLJSeqable.m in Sources */,
 				14AE6D8C17EAD15800CAAD55 /* CLJUtil.m in Sources */,
 				14B134C917F1909A0032A943 /* NSString+CLJILookup.m in Sources */,
+				14DB146F180E73BC00BD4AB2 /* CLJAtomicReference.m in Sources */,
+				14F06D921810A50E00583079 /* CLJAReference.m in Sources */,
 				140D552C180C3A6A00470C66 /* CLJPersistentHashMapHashCollisionNode.m in Sources */,
 				14B134D717F206610032A943 /* CLJPersistentHashMapArrayNode.m in Sources */,
 				14DAB97F180931EA0031226C /* NSObject+CLJIHashEq.m in Sources */,
@@ -586,6 +606,7 @@
 				14DAB969180291610031226C /* NSArray+ArrayWithChanges.m in Sources */,
 				14AE6D8817EACA7800CAAD55 /* CLJSymbol.m in Sources */,
 				14B134DA17F2093A0032A943 /* CLJPersistentHashMapBitmapIndexNode.m in Sources */,
+				14F06D8F180FA8AC00583079 /* NSString+CLJIntern.m in Sources */,
 				146C7BE017FBF1ED000FCBEA /* CLJPersistentVectorNode.m in Sources */,
 				14AE6D7917EA35ED00CAAD55 /* CLJAPersistentMap.m in Sources */,
 				14DAB9781807C2FF0031226C /* CLJPersistentHashMapUtils.m in Sources */,
@@ -610,6 +631,7 @@
 				146C7BE417FC5B48000FCBEA /* CLJPersistentVectorTests.m in Sources */,
 				14DAB9711803EEA80031226C /* NSEnumerator+CLJSeqable.m in Sources */,
 				14DAB9741803EEA80031226C /* NSString+CLJILookup.m in Sources */,
+				14090C151817AE30000ED126 /* CLJPersistentHashMapTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

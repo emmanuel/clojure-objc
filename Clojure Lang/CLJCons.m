@@ -20,6 +20,18 @@
 
 @implementation CLJCons
 
+#pragma mark - Factory methods
+
++ (instancetype)consWithMeta:(id<CLJIPersistentMap>)meta first:(id)first more:(id<CLJISeq>)more
+{
+    return [[self alloc] initWithMeta:meta first:first more:more];
+}
+
++ (instancetype)consWithFirst:(id)first more:(id<CLJISeq>)more
+{
+    return [[self alloc] initWithMeta:nil first:first more:more];
+}
+
 #pragma mark - Initialization methods
 
 - (instancetype)initWithMeta:(id<CLJIPersistentMap>)meta first:(id)first more:(id<CLJISeq>)more
@@ -28,8 +40,8 @@
 
     if (self)
     {
-        self.first = first;
-        self.more = more;
+        _first = first;
+        _more = more;
     }
 
     return self;
@@ -37,20 +49,12 @@
 
 - (instancetype)initWithFirst:(id)first more:(id<CLJISeq>)more
 {
-    self = [super withMeta:nil];
-
-    if (self)
-    {
-        self.first = first;
-        self.more = more;
-    }
-
-    return self;
+    return [self initWithMeta:nil first:first more:more];
 }
 
 - (instancetype)withMeta:(id<CLJIPersistentMap>)meta
 {
-    return [[CLJCons alloc] initWithMeta:meta first:self.first more:self.more];
+    return [[self class] consWithMeta:meta first:_first more:_more];
 }
 
 #pragma mark - CLJISeq methods
@@ -62,14 +66,12 @@
 
 - (id<CLJISeq>)next
 {
-    return [[self more] seq];
+    return [_more seq];
 }
-
-#pragma mark - CLJCounted methods
 
 - (NSUInteger)count
 {
-    return 1 + [self.more count];
+    return 1 + [_more count];
 }
 
 @end

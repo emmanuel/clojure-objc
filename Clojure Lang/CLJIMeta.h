@@ -13,6 +13,6 @@
 
 @protocol CLJIMeta
 
-- (id <CLJIPersistentMap>)meta;
+@property (nonatomic, strong, readonly) id<CLJIPersistentMap> meta;
 
 @end

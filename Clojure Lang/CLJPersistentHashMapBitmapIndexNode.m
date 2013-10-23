@@ -8,7 +8,7 @@
 
 #import "CLJUtil.h"
 #import "CLJCategories.h"
-#import "CLJPersistentHashMapUtils.h"
+#import "CLJPersistentHashMapUtils.m"
 #import "CLJPersistentHashMapBitmapIndexNode.h"
 #import "CLJPersistentHashMapArrayNode.h"
 #import "CLJPersistentHashMapHashCollisionNode.h"
@@ -17,7 +17,7 @@
 
 @interface CLJPersistentHashMapBitmapIndexNode ()
 
-@property (atomic) NSThread *editThread;
+@property (atomic) CLJAtomicReference *editThread;
 @property (nonatomic) NSUInteger bitmap;
 @property (nonatomic) NSPointerArray *array;
 
@@ -44,12 +44,12 @@
 
 #pragma mark - Initialization methods
 
-+ (instancetype)nodeWithEditThread:(NSThread *)editThread bitmap:(NSUInteger)bitmap array:(NSPointerArray *)array
++ (instancetype)nodeWithEditThread:(CLJAtomicReference *)editThread bitmap:(NSUInteger)bitmap array:(NSPointerArray *)array
 {
     return [[self alloc] initWithEditThread:editThread bitmap:bitmap array:array];
 }
 
-- (instancetype)initWithEditThread:(NSThread *)editThread bitmap:(NSUInteger)bitmap array:(NSPointerArray *)array
+- (instancetype)initWithEditThread:(CLJAtomicReference *)editThread bitmap:(NSUInteger)bitmap array:(NSPointerArray *)array
 {
     if (self = [super init])
     {
@@ -65,7 +65,7 @@
 
 - (NSUInteger)indexOfBit:(NSUInteger)bit
 {
-    return CLJPersistentHashMapUtil_countBitPopulation(self.bitmap & (bit - 1));
+    return CLJPersistentHashMapUtil_bitPopulation(self.bitmap & (bit - 1));
 }
 
 - (id<CLJIPersistentHashMapNode>)assocKey:(id)key withObject:(id)object shift:(NSUInteger)shift hash:(NSUInteger)hash addedLeaf:(BOOL *)addedLeaf
@@ -115,7 +115,7 @@
     // add branches below this node
     else
     {
-        NSUInteger numberOfSlotsOccupied = CLJPersistentHashMapUtil_countBitPopulation(self.bitmap);
+        NSUInteger numberOfSlotsOccupied = CLJPersistentHashMapUtil_bitPopulation(self.bitmap);
         // full; promote to array node
         if (16 <= numberOfSlotsOccupied)
         {
@@ -172,7 +172,7 @@
                 assocKey:key2 withObject:object2 shift:shift hash:key2Hash addedLeaf:&_];
 }
 
-- (id<CLJIMapEntry>)findKey:(id)key withShift:(NSUInteger)shift hash:(NSUInteger)hash
+- (id<CLJIMapEntry>)findKey:(id)key shift:(NSUInteger)shift hash:(NSUInteger)hash
 {
     NSPointerArray *array = self.array;
     NSUInteger bitmap = self.bitmap;
@@ -181,14 +181,14 @@
     NSUInteger index = CLJPersistentHashMapUtil_bitRank(bitmap, bit);
     id keyOrNil = [array pointerAtIndex:2 * index];
     id valOrNode = [array pointerAtIndex:(2 * index) + 1];
-    if (keyOrNil == nil) return [(id<CLJIPersistentHashMapNode>)valOrNode findKey:key withShift:shift + 5 hash:hash];
+    if (keyOrNil == nil) return [(id<CLJIPersistentHashMapNode>)valOrNode findKey:key shift:shift + 5 hash:hash];
     if (CLJUtil_equiv(key, keyOrNil)) return [CLJMapEntry mapEntryWithKey:keyOrNil object:valOrNode];
     return nil;
 }
 
-- (id)findKey:(id)key withShift:(NSUInteger)shift hash:(NSUInteger)hash notFound:(id)notFound
+- (id)findKey:(id)key shift:(NSUInteger)shift hash:(NSUInteger)hash notFound:(id)notFound
 {
-    return [self findKey:key withShift:shift hash:hash] ?: notFound;
+    return [self findKey:key shift:shift hash:hash] ?: notFound;
 }
 
 @end

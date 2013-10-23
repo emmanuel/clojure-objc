@@ -12,8 +12,8 @@
 @interface CLJPersistentHashMapBitmapIndexNode : NSObject <CLJIPersistentHashMapNode>
 
 + (instancetype)empty;
-+ (instancetype)nodeWithEditThread:(NSThread *)editThread bitmap:(NSUInteger)bitmap array:(NSPointerArray *)array;
++ (instancetype)nodeWithEditThread:(CLJAtomicReference *)editThread bitmap:(NSUInteger)bitmap array:(NSPointerArray *)array;
 
-- (instancetype)initWithEditThread:(NSThread *)editThread bitmap:(NSUInteger)bitmap array:(NSPointerArray *)array;
+- (instancetype)initWithEditThread:(CLJAtomicReference *)editThread bitmap:(NSUInteger)bitmap array:(NSPointerArray *)array;
 
 @end

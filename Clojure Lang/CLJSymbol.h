@@ -16,11 +16,9 @@
 
 @interface CLJSymbol : CLJAFn <CLJIObj, CLJNamed, CLJIHashEq>
 
-@property (nonatomic, readonly) NSString *namespace;
-@property (nonatomic, readonly) NSString *name;
-@property (nonatomic, readonly, retain) id <CLJIPersistentMap> meta;
++ (instancetype)symbolWithNamespaceOrName:(NSString *)nsOrName;
++ (instancetype)symbolWithNamespace:(NSString *)ns name:(NSString *)name;
 
-+ (instancetype)symbolWithNamespace:(NSString *)namespace name:(NSString *)name;
-+ (instancetype)symbolWithNamespaceOrName:(NSString *)namespaceOrName;
+- (instancetype)initWithMeta:(id<CLJIPersistentMap>)meta namespace:(NSString *)nsInterned name:(NSString *)nameInterned;
 
 @end

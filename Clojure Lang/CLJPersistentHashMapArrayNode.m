@@ -14,11 +14,9 @@
 
 @interface CLJPersistentHashMapArrayNode ()
 
-@property (atomic) NSThread *editThread;
+@property (atomic) CLJAtomicReference *editThread;
 @property (nonatomic) NSUInteger count;
 @property (nonatomic) NSPointerArray *array;
-
-- (void)removeAllObjects;
 
 @end
 
@@ -26,12 +24,14 @@
 
 @implementation CLJPersistentHashMapArrayNode
 
-+ (instancetype)nodeWithEditThread:(NSThread *)editThread count:(NSUInteger)count array:(NSPointerArray *)array
+#pragma mark - Initialization methods
+
++ (instancetype)nodeWithEditThread:(CLJAtomicReference *)editThread count:(NSUInteger)count array:(NSPointerArray *)array
 {
     return [[self alloc] initWithEditThread:editThread count:count array:array];
 }
 
-- (instancetype)initWithEditThread:(NSThread *)editThread count:(NSUInteger)count array:(NSPointerArray *)array
+- (instancetype)initWithEditThread:(CLJAtomicReference *)editThread count:(NSUInteger)count array:(NSPointerArray *)array
 {
     NSParameterAssert(array);
     
@@ -67,7 +67,7 @@
         id<CLJIPersistentHashMapNode> bitmapIndexNode = [[CLJPersistentHashMapBitmapIndexNode empty] assocKey:key withObject:object shift:shift + 5 hash:hash addedLeaf:addedLeaf];
         NSPointerArray *newArray = [self.array copy];
         [newArray replacePointerAtIndex:index withPointer:(__bridge void *)bitmapIndexNode];
-        return [CLJPersistentHashMapArrayNode nodeWithEditThread:nil count:_count + 1 array:newArray];
+        return [CLJPersistentHashMapArrayNode nodeWithEditThread:nil count:self.count + 1 array:newArray];
     }
 
     id<CLJIPersistentHashMapNode> newNode = [node assocKey:key withObject:object shift:shift + 5 hash:hash addedLeaf:addedLeaf];
@@ -75,48 +75,44 @@
 
     NSPointerArray *newArray = [self.array copy];
     [newArray replacePointerAtIndex:index withPointer:(__bridge void *)newNode];
-    return [CLJPersistentHashMapArrayNode nodeWithEditThread:nil count:_count array:newArray];
+    return [CLJPersistentHashMapArrayNode nodeWithEditThread:nil count:self.count array:newArray];
 }
 
-- (id<CLJIPersistentHashMapNode>)withoutKey:(id)key withShift:(NSUInteger)shift hash:(NSUInteger)hash
+- (id<CLJIPersistentHashMapNode>)withoutKey:(id)key shift:(NSUInteger)shift hash:(NSUInteger)hash
 {
     NSUInteger index = CLJPersistentHashMapUtil_mask(hash, shift);
-    // id<CLJIPersistentHashMapNode> node = (__bridge id<CLJIPersistentHashMapNode>)_array[index];
     id<CLJIPersistentHashMapNode> node = (__bridge id)[self.array pointerAtIndex:index];
     if (nil == node) return self;
-    id<CLJIPersistentHashMapNode> newNode = [node withoutKey:key withShift:shift + 5 hash:hash];
+    id<CLJIPersistentHashMapNode> newNode = [node withoutKey:key shift:shift + 5 hash:hash];
     if (newNode == node) return self;
+    NSUInteger count = self.count;
     if (nil == newNode)
     {
+        // shrink
         if (self.count <= 8) return [self packWithEditThread:nil index:index];
-        NSPointerArray *newArray = [self.array copy];
-        [newArray replacePointerAtIndex:index withPointer:(__bridge void *)newNode];
-        return [CLJPersistentHashMapArrayNode nodeWithEditThread:nil count:_count - 1 array:newArray];
+        count--;
     }
-    else
-    {
-        NSPointerArray *newArray = [self.array copy];
-        [newArray replacePointerAtIndex:index withPointer:(__bridge void *)newNode];
-        return [CLJPersistentHashMapArrayNode nodeWithEditThread:nil count:_count array:newArray];
-    }
+    NSPointerArray *newArray = [self.array copy];
+    [newArray replacePointerAtIndex:index withPointer:(__bridge void *)newNode];
+    return [CLJPersistentHashMapArrayNode nodeWithEditThread:nil count:count array:newArray];
 }
 
-- (id<CLJIMapEntry>)findKey:(id)key withShift:(NSUInteger)shift hash:(NSUInteger)hash
+- (id<CLJIMapEntry>)findKey:(id)key shift:(NSUInteger)shift hash:(NSUInteger)hash
 {
     NSUInteger index = CLJPersistentHashMapUtil_mask(hash, shift);
     id<CLJIPersistentHashMapNode> node = (__bridge id)[self.array pointerAtIndex:index];
     if (nil == node) return nil;
-    return [node findKey:key withShift:shift + 5 hash:hash];
+    return [node findKey:key shift:shift + 5 hash:hash];
 }
 
-- (id)findKey:(id)key withShift:(NSUInteger)shift hash:(NSUInteger)hash notFound:(id)notFound
+- (id)findKey:(id)key shift:(NSUInteger)shift hash:(NSUInteger)hash notFound:(id)notFound
 {
-    return [self findKey:key withShift:shift hash:hash] ?: notFound;
+    return [self findKey:key shift:shift hash:hash] ?: notFound;
 }
 
 #pragma mark - Internal/Private methods
 
-- (id<CLJIPersistentHashMapNode>)packWithEditThread:(NSThread *)editThread index:(NSUInteger)index
+- (id<CLJIPersistentHashMapNode>)packWithEditThread:(CLJAtomicReference *)editThread index:(NSUInteger)index
 {
     NSUInteger count = self.count;
     NSPointerArray *array = self.array;
@@ -136,7 +132,7 @@
         }
     }
 
-    for (NSUInteger i = index + 1; i < count; i++)
+    for (NSUInteger i = index + 1; i < [array count]; i++)
     {
         id object = [array pointerAtIndex:i];
         if (nil != object)

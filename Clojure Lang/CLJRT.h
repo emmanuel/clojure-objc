@@ -10,8 +10,8 @@
 @protocol CLJIPersistentMap;
 
 
-static inline id CLJRT_readTrueFalseUnknown(NSString *s);
+AINLINE id CLJRT_readTrueFalseUnknown(NSString *s);
 
-static inline id<CLJIPersistentMap> CLJRT_meta(id object);
+AINLINE id<CLJIPersistentMap> CLJRT_meta(id object);
 
-//static inline void CLJRT_addDefaultImplementationForClassOfProtocolFromImplementingClass(Class conformingClass, Protocol *proto, Class implementingClass);
+AINLINE void CLJRT_addDefaultImplementationForClassOfProtocolFromImplementingClass(Class conformingClass, Protocol *proto, Class implementingClass);
