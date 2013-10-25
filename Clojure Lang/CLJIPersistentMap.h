@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 Emmanuel Gomez. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "CLJAssociative.h"
 #import "CLJCounted.h"
 

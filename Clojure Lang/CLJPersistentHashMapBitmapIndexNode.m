@@ -71,6 +71,8 @@
 - (id<CLJIPersistentHashMapNode>)assocKey:(id)key withObject:(id)object shift:(NSUInteger)shift hash:(NSUInteger)hash addedLeaf:(BOOL *)addedLeaf
 {
     NSUInteger bitmap = self.bitmap;
+    // based on the 5 bits of hash that are used by this level of the tree,
+    // at which bit in the bitmask (0-31) should we check for key?
     NSUInteger bit = CLJPersistentHashMapUtil_bitpos(hash, shift);
     // how many bits below this one are set in the bitmask? (index of key in self.array)
     NSUInteger index = CLJPersistentHashMapUtil_bitRank(bitmap, bit);
@@ -78,8 +80,9 @@
     // replace the node on this level
     if ((bitmap & bit) != 0)
     {
-        id keyOrNil = [self.array pointerAtIndex:2 * index];
-        id objectOrNode = [self.array pointerAtIndex:(2 * index) + 1];
+        NSPointerArray *array = self.array;
+        id keyOrNil = [array pointerAtIndex:2 * index];
+        id objectOrNode = [array pointerAtIndex:(2 * index) + 1];
         // en route to leaf (k/v pair), continue copying path
         if (nil == keyOrNil)
         {
@@ -90,18 +93,18 @@
                                                                      hash:hash
                                                                 addedLeaf:addedLeaf];
             if (newNode == objectOrNode) return self;
-            NSPointerArray *newArray = [self.array copy];
+            NSPointerArray *newArray = [array copy];
             [newArray replacePointerAtIndex:(2 * index) + 1 withPointer:(__bridge void *)newNode];
-            return [CLJPersistentHashMapBitmapIndexNode nodeWithEditThread:nil bitmap:self.bitmap array:newArray];
+            return [CLJPersistentHashMapBitmapIndexNode nodeWithEditThread:nil bitmap:bitmap array:newArray];
         }
         // leaf (k/v pair) located, replace existing value
         if (CLJUtil_equiv(key, keyOrNil))
         {
             if (object == objectOrNode) return self;
-            NSPointerArray *newArray = [_array copy];
+            NSPointerArray *newArray = [array copy];
             [newArray replacePointerAtIndex:(2 * index) + 1 withPointer:(__bridge void *)object];
             return [CLJPersistentHashMapBitmapIndexNode nodeWithEditThread:nil
-                                                                   bitmap:self.bitmap
+                                                                    bitmap:bitmap
                                                                      array:newArray];
         }
         // place leaf (k/v pair) in replacement node's array
@@ -110,23 +113,22 @@
         [newArray replacePointerAtIndex:2 * index withPointer:(void *)nil];
         id<CLJIPersistentHashMapNode> newNode = [self createNodeWithShift:shift + 5 key1:keyOrNil object1:objectOrNode key2Hash:hash key2:key object2:object];
         [newArray replacePointerAtIndex:(2 * index) + 1 withPointer:(__bridge void *)newNode];
-        return [CLJPersistentHashMapBitmapIndexNode nodeWithEditThread:nil bitmap:self.bitmap array:newArray];
+        return [CLJPersistentHashMapBitmapIndexNode nodeWithEditThread:nil bitmap:bitmap array:newArray];
     }
     // add branches below this node
     else
     {
-        NSUInteger numberOfSlotsOccupied = CLJPersistentHashMapUtil_bitPopulation(self.bitmap);
+        NSUInteger numberOfSlotsOccupied = CLJPersistentHashMapUtil_bitPopulation(bitmap);
         // full; promote to array node
         if (16 <= numberOfSlotsOccupied)
         {
-            NSPointerArray *nodes = [NSPointerArray strongObjectsPointerArray];
-            [nodes setCount:32];
+            NSPointerArray *newArray = [NSPointerArray strongObjectsPointerArray];
+            [newArray setCount:32];
             NSUInteger jdx = CLJPersistentHashMapUtil_mask(hash, shift);
             id<CLJIPersistentHashMapNode> newNode = [CLJPersistentHashMapBitmapIndexNode empty];
             newNode = [newNode assocKey:key withObject:object shift:shift + 5 hash:hash addedLeaf:addedLeaf];
-            [nodes replacePointerAtIndex:jdx withPointer:(__bridge void *)newNode];
+            [newArray replacePointerAtIndex:jdx withPointer:(__bridge void *)newNode];
             NSUInteger j = 0;
-            NSUInteger bitmap = self.bitmap;
             NSPointerArray *array = self.array;
             for (NSUInteger i = 0; i < 32; i++) {
                 // populated at position i
@@ -135,7 +137,7 @@
                     // node in position (reference in new array node)
                     if (nil == [array pointerAtIndex:j])
                     {
-                        [nodes replacePointerAtIndex:i withPointer:[array pointerAtIndex:j + 1]];
+                        [newArray replacePointerAtIndex:i withPointer:[array pointerAtIndex:j + 1]];
                     }
                     // key in position (replace k/v pair with bitmap index node in new array node)
                     else
@@ -143,12 +145,12 @@
                         id key = [array pointerAtIndex:j];
                         id<CLJIPersistentHashMapNode> newNode = [CLJPersistentHashMapBitmapIndexNode empty];
                         newNode = [newNode assocKey:key withObject:[array pointerAtIndex:j + 1] shift:shift + 5 hash:[key clj_hasheq] addedLeaf:addedLeaf];
-                        [nodes replacePointerAtIndex:i withPointer:(__bridge void *)newNode];
+                        [newArray replacePointerAtIndex:i withPointer:(__bridge void *)newNode];
                     }
                     j += 2;
                 }
             }
-            return [CLJPersistentHashMapArrayNode nodeWithEditThread:nil count:numberOfSlotsOccupied + 1 array:nodes];
+            return [CLJPersistentHashMapArrayNode nodeWithEditThread:nil count:numberOfSlotsOccupied + 1 array:newArray];
         }
         else
         {
@@ -157,7 +159,7 @@
             [newArray insertPointer:(__bridge void *)object atIndex:(2 * index) + 1];
             *addedLeaf = YES;
 
-            return [CLJPersistentHashMapBitmapIndexNode nodeWithEditThread:nil bitmap:bitmap array:newArray];
+            return [CLJPersistentHashMapBitmapIndexNode nodeWithEditThread:nil bitmap:bitmap | bit array:newArray];
         }
     }
 }
@@ -182,6 +184,7 @@
     id keyOrNil = [array pointerAtIndex:2 * index];
     id valOrNode = [array pointerAtIndex:(2 * index) + 1];
     if (keyOrNil == nil) return [(id<CLJIPersistentHashMapNode>)valOrNode findKey:key shift:shift + 5 hash:hash];
+//    if ([key clj_equiv:keyOrNil]) return [CLJMapEntry mapEntryWithKey:keyOrNil object:valOrNode];
     if (CLJUtil_equiv(key, keyOrNil)) return [CLJMapEntry mapEntryWithKey:keyOrNil object:valOrNode];
     return nil;
 }

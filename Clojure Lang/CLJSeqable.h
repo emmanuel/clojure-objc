@@ -6,6 +6,8 @@
 //  Published under the Eclipse Public License
 //
 
+#import <Foundation/Foundation.h>
+
 @protocol CLJISeq;
 
 

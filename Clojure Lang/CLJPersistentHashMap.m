@@ -79,7 +79,7 @@
 
 #pragma mark - CLJIPersistentMap
 
-- (id<CLJIPersistentMap>)assocKey:(id)key withObject:(id)object
+- (instancetype)assocKey:(id)key withObject:(id)object
 {
     if (nil == key)
     {
@@ -92,8 +92,8 @@
                                             nilValue:object];
 	}
     BOOL addedLeaf = NO;
-    id<CLJIPersistentHashMapNode> newRoot = nil == self.root ? nil : [CLJPersistentHashMapBitmapIndexNode empty];
-    newRoot = [newRoot assocKey:key withObject:object shift:0 hash:0 addedLeaf:&addedLeaf];
+    id<CLJIPersistentHashMapNode> newRoot = self.root ?: [CLJPersistentHashMapBitmapIndexNode empty];
+    newRoot = [newRoot assocKey:key withObject:object shift:0 hash:[key hash] addedLeaf:&addedLeaf];
     if (newRoot == self.root) return self;
     return [CLJPersistentHashMap hashMapWithMeta:self.meta count:(self.count + (addedLeaf ? 1 : 0)) rootNode:newRoot hasNilValue:self.hasNil nilValue:self.nilValue];
 }
@@ -101,16 +101,11 @@
 - (BOOL)containsKey:(id)key
 {
     if (nil == key) return self.hasNil;
-    if (nil != self.root)
-    {
-        id notFound = [CLJPersistentHashMap notFound];
-        id found = [self.root findKey:key shift:0 hash:[key clj_hasheq] notFound:notFound];
-        return notFound != found;
-    }
-    else
-    {
-        return NO;
-    }
+    if (nil == self.root) return NO;
+
+    id notFound = [CLJPersistentHashMap notFound];
+    id found = [self.root findKey:key shift:0 hash:[key hash] notFound:notFound];
+    return notFound != found;
 }
 
 //public IMapEntry entryAt(Object key){
@@ -121,7 +116,7 @@
 - (id<CLJIMapEntry>)entryAt:(id)key
 {
     if (nil == key) return self.hasNil ? [CLJMapEntry mapEntryWithKey:nil object:self.nilValue] : nil;
-    return (nil != self.root) ? [self.root findKey:key shift:0 hash:[key clj_hasheq]] : nil;
+    return [self.root findKey:key shift:0 hash:[key hash]];
 }
 
 @end

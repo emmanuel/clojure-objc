@@ -12,8 +12,7 @@
 
 @protocol CLJIMapEntry;
 
-
-@protocol CLJAssociative <NSObject, CLJIPersistentCollection, CLJILookup>
+@protocol CLJAssociative <CLJIPersistentCollection, CLJILookup, NSObject>
 
 - (BOOL)containsKey:(id)key;
 - (id<CLJIMapEntry>)entryAt:(id)key;

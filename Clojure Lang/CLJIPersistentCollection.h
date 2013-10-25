@@ -6,10 +6,9 @@
 //  Published under the Eclipse Public License
 //
 
-#import <Foundation/Foundation.h>
 #import "CLJSeqable.h"
 
-@protocol CLJIPersistentCollection <CLJSeqable, NSObject>
+@protocol CLJIPersistentCollection <CLJSeqable>
 
 - (id<CLJIPersistentCollection>)cons:(id)object;
 - (id<CLJIPersistentCollection>)empty;

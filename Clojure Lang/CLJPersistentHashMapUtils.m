@@ -26,8 +26,12 @@ AINLINE NSUInteger CLJPersistentHashMapUtil_bitRank(NSUInteger bitmap, NSUIntege
     return CLJPersistentHashMapUtil_bitPopulation(bitmap & (bit - 1));
 }
 
+// http://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetKernighan
 AINLINE NSUInteger CLJPersistentHashMapUtil_bitPopulation(NSUInteger bitmap)
 {
-    return 0;
-    // return CLJPersistentHashMapUtil_countBitPopulation(bitmap & (bit - 1));
+    NSUInteger count;
+    for (count = 0; bitmap; count++) {
+        bitmap &= bitmap - 1;
+    }
+    return count;
 }
