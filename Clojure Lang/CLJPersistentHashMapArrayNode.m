@@ -9,7 +9,7 @@
 #import <objc/runtime.h>
 #import "CLJPersistentHashMapUtils.h"
 #import "CLJPersistentHashMapArrayNode.h"
-#import "CLJPersistentHashMapBitmapIndexNode.h"
+#import "CLJPersistentHashMapBitmapIndexedNode.h"
 
 
 @interface CLJPersistentHashMapArrayNode ()
@@ -64,7 +64,7 @@
 
     if (nil == node)
     {
-        id<CLJIPersistentHashMapNode> bitmapIndexNode = [[CLJPersistentHashMapBitmapIndexNode empty] assocKey:key withObject:object shift:shift + 5 hash:hash addedLeaf:addedLeaf];
+        id<CLJIPersistentHashMapNode> bitmapIndexNode = [[CLJPersistentHashMapBitmapIndexedNode empty] assocKey:key withObject:object shift:shift + 5 hash:hash addedLeaf:addedLeaf];
         NSPointerArray *newArray = [self.array copy];
         [newArray replacePointerAtIndex:index withPointer:(__bridge void *)bitmapIndexNode];
         return [CLJPersistentHashMapArrayNode nodeWithEditThread:nil count:self.count + 1 array:newArray];
@@ -143,7 +143,7 @@
         }
     }
 
-    return [CLJPersistentHashMapBitmapIndexNode nodeWithEditThread:editThread bitmap:bitmap array:newArray];
+    return [CLJPersistentHashMapBitmapIndexedNode nodeWithEditThread:editThread bitmap:bitmap array:newArray];
 }
 
 @end

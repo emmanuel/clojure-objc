@@ -7,7 +7,7 @@
 //
 
 #import "CLJPersistentHashMap.h"
-#import "CLJPersistentHashMapBitmapIndexNode.h"
+#import "CLJPersistentHashMapBitmapIndexedNode.h"
 #import "CLJMapEntry.h"
 #import "CLJPersistentHashMapUtils.h"
 
@@ -99,7 +99,7 @@
                                             nilValue:object];
 	}
     BOOL addedLeaf = NO;
-    id<CLJIPersistentHashMapNode> newRoot = self.root ?: [CLJPersistentHashMapBitmapIndexNode empty];
+    id<CLJIPersistentHashMapNode> newRoot = self.root ?: [CLJPersistentHashMapBitmapIndexedNode empty];
     newRoot = [newRoot assocKey:key withObject:object shift:0 hash:[key hash] addedLeaf:&addedLeaf];
     if (newRoot == self.root) return self;
     return [CLJPersistentHashMap hashMapWithMeta:self.meta count:(self.count + (addedLeaf ? 1 : 0)) rootNode:newRoot hasNilValue:self.hasNil nilValue:self.nilValue];

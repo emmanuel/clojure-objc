@@ -47,7 +47,7 @@
 		14B134CC17F191C50032A943 /* NSArray+CLJILookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134CB17F191C50032A943 /* NSArray+CLJILookup.m */; };
 		14B134CF17F1927F0032A943 /* NSObject+CLJILookup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134CE17F1927F0032A943 /* NSObject+CLJILookup.m */; };
 		14B134D717F206610032A943 /* CLJPersistentHashMapArrayNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134D617F206610032A943 /* CLJPersistentHashMapArrayNode.m */; };
-		14B134DA17F2093A0032A943 /* CLJPersistentHashMapBitmapIndexNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134D917F2093A0032A943 /* CLJPersistentHashMapBitmapIndexNode.m */; };
+		14B134DA17F2093A0032A943 /* CLJPersistentHashMapBitmapIndexedNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134D917F2093A0032A943 /* CLJPersistentHashMapBitmapIndexedNode.m */; };
 		14B134E217F657F50032A943 /* CLJBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134E117F657F50032A943 /* CLJBox.m */; };
 		14B134E517F9DA610032A943 /* CLJPersistentVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B134E417F9DA610032A943 /* CLJPersistentVector.m */; };
 		14DAB969180291610031226C /* NSArray+ArrayWithChanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DAB968180291610031226C /* NSArray+ArrayWithChanges.m */; };
@@ -196,8 +196,8 @@
 		14B134D417F1A4CF0032A943 /* CLJIPersistentHashMapNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLJIPersistentHashMapNode.h; sourceTree = "<group>"; };
 		14B134D517F206610032A943 /* CLJPersistentHashMapArrayNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJPersistentHashMapArrayNode.h; sourceTree = "<group>"; };
 		14B134D617F206610032A943 /* CLJPersistentHashMapArrayNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJPersistentHashMapArrayNode.m; sourceTree = "<group>"; };
-		14B134D817F2093A0032A943 /* CLJPersistentHashMapBitmapIndexNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJPersistentHashMapBitmapIndexNode.h; sourceTree = "<group>"; };
-		14B134D917F2093A0032A943 /* CLJPersistentHashMapBitmapIndexNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJPersistentHashMapBitmapIndexNode.m; sourceTree = "<group>"; };
+		14B134D817F2093A0032A943 /* CLJPersistentHashMapBitmapIndexedNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJPersistentHashMapBitmapIndexedNode.h; sourceTree = "<group>"; };
+		14B134D917F2093A0032A943 /* CLJPersistentHashMapBitmapIndexedNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJPersistentHashMapBitmapIndexedNode.m; sourceTree = "<group>"; };
 		14B134DE17F4340A0032A943 /* NSArray+CLJCounted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+CLJCounted.h"; sourceTree = "<group>"; };
 		14B134DF17F6570C0032A943 /* CLJReversible.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLJReversible.h; sourceTree = "<group>"; };
 		14B134E017F657F50032A943 /* CLJBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJBox.h; sourceTree = "<group>"; };
@@ -305,8 +305,8 @@
 				14AE6D7C17EA364400CAAD55 /* CLJPersistentHashMap.m */,
 				14B134D517F206610032A943 /* CLJPersistentHashMapArrayNode.h */,
 				14B134D617F206610032A943 /* CLJPersistentHashMapArrayNode.m */,
-				14B134D817F2093A0032A943 /* CLJPersistentHashMapBitmapIndexNode.h */,
-				14B134D917F2093A0032A943 /* CLJPersistentHashMapBitmapIndexNode.m */,
+				14B134D817F2093A0032A943 /* CLJPersistentHashMapBitmapIndexedNode.h */,
+				14B134D917F2093A0032A943 /* CLJPersistentHashMapBitmapIndexedNode.m */,
 				140D552A180C3A6A00470C66 /* CLJPersistentHashMapHashCollisionNode.h */,
 				140D552B180C3A6A00470C66 /* CLJPersistentHashMapHashCollisionNode.m */,
 				14DAB9791807C42A0031226C /* CLJPersistentHashMapConstants.h */,
@@ -605,7 +605,7 @@
 				14AE6D8417EAC73400CAAD55 /* CLJRT.m in Sources */,
 				14DAB969180291610031226C /* NSArray+ArrayWithChanges.m in Sources */,
 				14AE6D8817EACA7800CAAD55 /* CLJSymbol.m in Sources */,
-				14B134DA17F2093A0032A943 /* CLJPersistentHashMapBitmapIndexNode.m in Sources */,
+				14B134DA17F2093A0032A943 /* CLJPersistentHashMapBitmapIndexedNode.m in Sources */,
 				14F06D8F180FA8AC00583079 /* NSString+CLJIntern.m in Sources */,
 				146C7BE017FBF1ED000FCBEA /* CLJPersistentVectorNode.m in Sources */,
 				14AE6D7917EA35ED00CAAD55 /* CLJAPersistentMap.m in Sources */,
