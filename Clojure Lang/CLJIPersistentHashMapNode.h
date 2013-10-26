@@ -14,16 +14,19 @@
 #import "CLJBox.h"
 
 
-@protocol CLJIPersistentHashMapNode <NSCoding>
+@protocol CLJIPersistentHashMapNode <NSObject> // NSCoding
 
 - (id<CLJIPersistentHashMapNode>)assocKey:(id)key withObject:(id)object shift:(NSUInteger)shift hash:(NSUInteger)hash addedLeaf:(BOOL *)addedLeaf;
-- (id<CLJIPersistentHashMapNode>)assocKey:(id)key withObject:(id)object editThread:(CLJAtomicReference *)edit shift:(NSUInteger)shift hash:(NSUInteger)hash addedLeaf:(BOOL *)addedLeaf;
-
 - (id<CLJIPersistentHashMapNode>)withoutKey:(id)key shift:(NSUInteger)shift hash:(NSUInteger)hash;
-- (id<CLJIPersistentHashMapNode>)withoutKey:(id)key editThread:(CLJAtomicReference *)edit shift:(NSUInteger)shift hash:(NSUInteger)hash removedLeaf:(BOOL *)removedLeaf;
-
 - (id<CLJIMapEntry>)findKey:(id)key shift:(NSUInteger)shift hash:(NSUInteger)hash;
 - (id)findKey:(id)key shift:(NSUInteger)shift hash:(NSUInteger)hash notFound:(id)notFound;
+
+// TODO: not yet implemented
+@optional
+
+- (id<CLJIPersistentHashMapNode>)assocKey:(id)key withObject:(id)object editThread:(CLJAtomicReference *)edit shift:(NSUInteger)shift hash:(NSUInteger)hash addedLeaf:(BOOL *)addedLeaf;
+
+- (id<CLJIPersistentHashMapNode>)withoutKey:(id)key editThread:(CLJAtomicReference *)edit shift:(NSUInteger)shift hash:(NSUInteger)hash removedLeaf:(BOOL *)removedLeaf;
 
 - (id<CLJISeq>)nodeSeq;
 

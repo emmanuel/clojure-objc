@@ -21,6 +21,7 @@
 
 @end
 
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation CLJASeq
 {
@@ -33,7 +34,7 @@
 {
     if (self = [super initWithMeta:meta])
     {
-        _hash = -1;
+        _hash = kCLJIHashEqUninitializedHashValue;
     }
 
     return self;
@@ -71,7 +72,7 @@
 
 - (NSUInteger)hash
 {
-    if (-1 == _hash)
+    if (kCLJIHashEqUninitializedHashValue == _hash)
     {
         NSUInteger hash = 1;
         for (id<CLJISeq> s = [self seq]; nil != s; s = [s next]) {
@@ -83,23 +84,39 @@
     return _hash;
 }
 
-#pragma mark - CLJASeq methods
+#pragma mark - CLJIPersistentCollection methods
 
 - (id<CLJIPersistentCollection>)empty
 {
     return [CLJPersistentList empty];
 }
 
+//- (id<CLJISeq>)cons:(id)object
+//{
+//    [self doesNotRecognizeSelector:_cmd];
+//    return nil;
+//}
+
+#pragma mark - CLJASeq methods
+
+//- (id)first
+//{
+//    [self doesNotRecognizeSelector:_cmd];
+//    return nil;
+//}
+
+//- (id<CLJISeq>)next
+//{
+//    [self doesNotRecognizeSelector:_cmd];
+//    return nil;
+//}
+
 - (id<CLJISeq>)rest
 {
-    id<CLJSeqable> m = [self more];
-    
-    if (nil == m) return nil;
-    
-    return [m seq];
+    return [[self more] seq];
 }
 
-#pragma mark - equiv
+#pragma mark - CLJIEquiv methods
 
 - (BOOL)equiv:(id)object
 {
@@ -142,11 +159,6 @@
     return [self first];
 }
 
-- (instancetype)pop
-{
-    return [self rest];
-}
-
 #pragma mark - CLJCounted methods
 
 - (NSUInteger)count
@@ -154,10 +166,7 @@
     NSUInteger i = 1;
 
     for (id<CLJISeq> s = [self next]; nil != s; s = [s next], i++) {
-        if ([((id) s) conformsToProtocol:@protocol(CLJCounted)])
-        {
-            return i + [s count];
-        }
+        if ([s conformsToProtocol:@protocol(CLJCounted)]) return i + [s count];
     }
 
     return i;
@@ -180,23 +189,3 @@
 }
 
 @end
-
-//
-////public Object reduce(IFn f) {
-////	Object ret = first();
-////	for(ISeq s = rest(); s != null; s = s.rest())
-////		ret = f.invoke(ret, s.first());
-////	return ret;
-////}
-////
-////public Object reduce(IFn f, Object start) {
-////	Object ret = f.invoke(start, first());
-////	for(ISeq s = rest(); s != null; s = s.rest())
-////		ret = f.invoke(ret, s.first());
-////	return ret;
-////}
-//
-////
-//public ISeq cons(Object o){
-//	return new Cons(o, this);
-//}

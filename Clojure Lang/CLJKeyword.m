@@ -23,6 +23,9 @@
 
 @implementation CLJKeyword
 
+@synthesize ns;
+@synthesize name;
+
 #pragma mark - Factory methods
 
 + (instancetype)keywordWithSymbol:(CLJSymbol *)symbol
@@ -32,7 +35,12 @@
 
 + (instancetype)keywordWithNamespaceOrName:(NSString *)namespaceOrName
 {
-    return [self keywordWithSymbol:[CLJSymbol symbolWithNamespaceOrName:namespaceOrName]];
+    return [[self alloc] initWithSymbol:[CLJSymbol symbolWithNamespaceOrName:namespaceOrName]];
+}
+
++ (instancetype)keywordWithNamespace:(NSString *)namespace name:(NSString *)name
+{
+    return [[self alloc] initWithSymbol:[CLJSymbol symbolWithNamespace:namespace name:name]];
 }
 
 #pragma mark - Initialization methods
@@ -48,25 +56,31 @@
     return self;
 }
 
+#pragma mark - CLJIHashEq methods
+
+- (NSUInteger)clj_hasheq
+{
+    return _hash;
+}
+
 #pragma mark - CLJIFn methods
 
 - (id)invoke
 {
-    @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                   reason:[NSString stringWithFormat:@"Wrong number of args passed to keyword: %@", [self description]]
-                                 userInfo:nil];
+    NSString *reason = [NSString stringWithFormat:@"Wrong number of args passed to keyword: %@", [self description]];
+    @throw [NSException exceptionWithName:NSInvalidArgumentException reason:reason userInfo:nil];
 }
 
 - (id)invoke:(id)arg
 {
     return [arg get:self];
-    IMP foo = imp_implementationWithBlock(^{ @"foo"; });
 }
 
-//- (id)invokeWithArgs:(id)arg1, ...
-//{
-//    
-//}
+- (id)invokeWithArgs:(id)arg1, ...
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
 
 //final public Object invoke(Object obj, Object notFound) {
 //	if(obj instanceof ILookup)
@@ -74,6 +88,10 @@
 //	return RT.get(obj, this, notFound);
 //}
 
-
+- (id)applyTo:(id<CLJISeq>)argumentSeq
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
 
 @end

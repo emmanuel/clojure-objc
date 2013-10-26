@@ -6,10 +6,9 @@
 //  Copyright (c) 2013 Emmanuel Gomez. All rights reserved.
 //
 
-@protocol CLJILookup;
-#import "NSDictionary+CLJILookup.h"
+#import <Foundation/Foundation.h>
 
-@protocol CLJILookup
+@protocol CLJILookup <NSObject>
 
 - (id)get:(id)key;
 - (id)get:(id)key withDefault:(id)notFound;

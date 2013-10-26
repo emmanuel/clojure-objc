@@ -65,7 +65,7 @@
 
 - (NSUInteger)indexOfBit:(NSUInteger)bit
 {
-    return CLJPersistentHashMapUtil_bitPopulation(self.bitmap & (bit - 1));
+    return CLJPersistentHashMapUtil_bitRank(self.bitmap, bit);
 }
 
 - (id<CLJIPersistentHashMapNode>)assocKey:(id)key withObject:(id)object shift:(NSUInteger)shift hash:(NSUInteger)hash addedLeaf:(BOOL *)addedLeaf
@@ -73,7 +73,7 @@
     NSUInteger bitmap = self.bitmap;
     // based on the 5 bits of hash that are used by this level of the tree,
     // at which bit in the bitmask (0-31) should we check for key?
-    NSUInteger bit = CLJPersistentHashMapUtil_bitpos(hash, shift);
+    NSUInteger bit = CLJPersistentHashMapUtil_bitPosition(hash, shift);
     // how many bits below this one are set in the bitmask? (index of key in self.array)
     NSUInteger index = CLJPersistentHashMapUtil_bitRank(bitmap, bit);
 
@@ -178,7 +178,7 @@
 {
     NSPointerArray *array = self.array;
     NSUInteger bitmap = self.bitmap;
-    NSUInteger bit = CLJPersistentHashMapUtil_bitpos(hash, shift);
+    NSUInteger bit = CLJPersistentHashMapUtil_bitPosition(hash, shift);
     if ((bitmap & bit) == 0) return nil;
     NSUInteger index = CLJPersistentHashMapUtil_bitRank(bitmap, bit);
     id keyOrNil = [array pointerAtIndex:2 * index];

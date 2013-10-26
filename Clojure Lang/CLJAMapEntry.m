@@ -8,7 +8,14 @@
 
 #import "CLJAMapEntry.h"
 
+// This is an abstract class, so ignore not implemented warnings
+#pragma clang diagnostic ignored "-Wprotocol"
+
 @implementation CLJAMapEntry
+
+#pragma mark - CLJIMapEntry methods
+
+#pragma mark - CLJIPersistentVector methods
 
 - (id)nth:(NSUInteger)index
 {
@@ -16,6 +23,8 @@
     if (1 == index) return self.object;
     @throw [NSException exceptionWithName:NSRangeException reason:@"map entries have 2 elements" userInfo:nil];
 }
+
+#pragma mark - CLJCounted methods
 
 - (NSUInteger)count
 {

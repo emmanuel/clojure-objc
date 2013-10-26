@@ -11,10 +11,14 @@
 
 @protocol CLJIPersistentMap;
 
-@interface CLJObj : NSObject <CLJIObj, NSCoding>
+@interface CLJObj : NSObject <CLJIObj>
 
 @property (nonatomic, readonly, retain) id<CLJIPersistentMap> meta;
 
 - (instancetype)initWithMeta:(id<CLJIPersistentMap>)meta;
+
+@end
+
+@interface CLJObj (NotImplemented) <NSCoding>
 
 @end

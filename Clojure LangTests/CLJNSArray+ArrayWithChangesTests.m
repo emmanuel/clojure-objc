@@ -29,16 +29,16 @@
 
 - (void)testArrayWithIndexSetToObjectDoesNotBlowUp
 {
-    id firstObject = [[NSObject alloc] init];
-    id secondObject = [[NSObject alloc] init];
+    id firstObject = [NSObject new];
+    id secondObject = [NSObject new];
     NSArray *testArray = [[NSArray array] arrayByAddingObject:firstObject];
     XCTAssertNoThrow([testArray arrayWithIndex:0 setToObject:secondObject], @"expected arrayWithIndex:setToObject: not to throw an exception");
 }
 
 - (void)testSupportsSubsequentRetrieval
 {
-    id firstObject = [[NSObject alloc] init];
-    id secondObject = [[NSObject alloc] init];
+    id firstObject = [NSObject new];
+    id secondObject = [NSObject new];
     NSArray *testArray = [[[NSArray array] arrayByAddingObject:firstObject] arrayWithIndex:0 setToObject:secondObject];
     XCTAssertNotEqual(firstObject, [testArray objectAtIndex:0], @"expected arrayWithIndex:setToObject: to stick");
 }

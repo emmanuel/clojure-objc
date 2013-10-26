@@ -56,7 +56,7 @@
     CLJPersistentVector *vec = [CLJPersistentVector empty];
 
     for (NSUInteger i = 0; i < count; i++) {
-        vec = [vec cons:[[NSObject alloc] init]];
+        vec = [vec cons:[NSObject new]];
     }
 
     return vec;
@@ -92,12 +92,12 @@
 {
     CLJPersistentVector *vec = [CLJPersistentVector empty];
     XCTAssertNotNil(vec, @"could not get empty vector");
-    XCTAssertNotEqualObjects(vec, [vec cons:[[NSObject alloc] init]], @"cons returned original instance");
+    XCTAssertNotEqualObjects(vec, [vec cons:[NSObject new]], @"cons returned original instance");
 }
 
 - (void)testNthWorksAfterCons
 {
-    NSObject *content = [[NSObject alloc] init];
+    NSObject *content = [NSObject new];
     CLJPersistentVector *vec = [[CLJPersistentVector empty] cons:content];
     XCTAssertNotNil(vec, @"could not cons on empty vector");
     XCTAssertEqualObjects(content, [vec nth:0], @"nth did not return original instance");
@@ -105,7 +105,7 @@
 
 - (void)testCountWorksAfterFirstCons
 {
-    NSObject *content = [[NSObject alloc] init];
+    NSObject *content = [NSObject new];
     CLJPersistentVector *vec = [[CLJPersistentVector empty] cons:content];
     XCTAssertNotNil(vec, @"could not cons on empty vector");
     XCTAssertEqual(1U, [vec count], @"count did not return 1 after cons");
@@ -145,7 +145,7 @@
 {
     NSUInteger index = 0;
     CLJPersistentVector *vec1 = [CLJPersistentVector empty];
-    NSObject *insertedObject = [[NSObject alloc] init];
+    NSObject *insertedObject = [NSObject new];
     CLJPersistentVector *vec2 = [vec1 assocN:index withObject:insertedObject];
     XCTAssertNotNil(vec2, @"vector with 0 elements returned nil from assocN:withObject:");
     XCTAssertNotEqual(vec1, vec2, @"vector did not return new vector instance");
@@ -154,14 +154,14 @@
 - (void)testAssocNReturnsVectorWithObjectAtIndex
 {
     NSUInteger index = 0;
-    NSObject *insertedObject = [[NSObject alloc] init];
+    NSObject *insertedObject = [NSObject new];
     CLJPersistentVector *vec = [[CLJPersistentVector empty] assocN:index withObject:insertedObject];
     XCTAssertEqual([vec nth:index], insertedObject, @"vector did not retrieve expected object");
 }
 
 - (void)testAssocNWith1LevelReturnsVectorWithObjectAtIndex
 {
-    NSObject *insertedObject = [[NSObject alloc] init];
+    NSObject *insertedObject = [NSObject new];
     CLJPersistentVector *vec = [self vectorWithLevel:1];
     NSUInteger index = 1 << [vec shift];
     vec = [vec assocN:index withObject:insertedObject];
@@ -170,7 +170,7 @@
 
 - (void)testAssocNWith2LevelsReturnsVectorWithObjectAtIndex
 {
-    NSObject *insertedObject = [[NSObject alloc] init];
+    NSObject *insertedObject = [NSObject new];
     CLJPersistentVector *vec = [self vectorWithLevel:2];
     NSUInteger index = 1 << [vec shift];
     vec = [vec assocN:index withObject:insertedObject];
@@ -179,7 +179,7 @@
 
 - (void)testAssocNWith3LevelsReturnsVectorWithObjectAtIndex
 {
-    NSObject *insertedObject = [[NSObject alloc] init];
+    NSObject *insertedObject = [NSObject new];
     CLJPersistentVector *vec = [self vectorWithLevel:3];
     NSUInteger index = 1 << [vec shift];
     vec = [vec assocN:index withObject:insertedObject];

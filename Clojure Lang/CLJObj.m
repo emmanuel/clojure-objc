@@ -10,6 +10,8 @@
 
 @implementation CLJObj
 
+#pragma mark - Initialization methods
+
 - (instancetype)initWithMeta:(id<CLJIPersistentMap>)meta
 {
     if (self = [super init])
@@ -18,6 +20,14 @@
     }
 
     return self;
+}
+
+#pragma mark - Initialization methods
+
+- (instancetype)withMeta:(id<CLJIPersistentMap>)meta
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
 }
 
 @end

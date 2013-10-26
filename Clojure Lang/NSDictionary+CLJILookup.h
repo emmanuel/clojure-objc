@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "CLJILookup.h"
 
-@interface NSDictionary (CLJILookup) <CLJILookup>
+@interface NSDictionary (CLJILookup)
 
 @end

@@ -13,7 +13,7 @@
 
 - (id<CLJISeq>)seq
 {
-    return [[CLJArraySeq alloc] initWithMeta:nil array:self];
+    return [[CLJArraySeq alloc] initWithMeta:nil array:self index:0];
 }
 
 @end

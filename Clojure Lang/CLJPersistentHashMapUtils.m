@@ -16,7 +16,7 @@ AINLINE NSUInteger CLJPersistentHashMapUtil_mask(NSUInteger hash, NSUInteger shi
 	return ((hash >> shift) & 0x01f);
 }
 
-AINLINE NSUInteger CLJPersistentHashMapUtil_bitpos(NSUInteger hash, NSUInteger shift)
+AINLINE NSUInteger CLJPersistentHashMapUtil_bitPosition(NSUInteger hash, NSUInteger shift)
 {
     return 1 << CLJPersistentHashMapUtil_mask(hash, shift);
 }

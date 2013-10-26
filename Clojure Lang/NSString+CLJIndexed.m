@@ -10,6 +10,8 @@
 #import "NSString+CLJCounted.m"
 
 
+#pragma clang diagnostic ignored "-Wprotocol"
+
 @implementation NSString (CLJIndexed)
 
 - (id)nth:(NSUInteger)index

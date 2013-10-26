@@ -36,7 +36,7 @@
 
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        empty = [[self alloc] initWithMeta:nil count:0 root:nil hasNilValue:NO nilValue:nil];
+        empty = [[self alloc] initWithMeta:nil count:0 rootNode:nil hasNilValue:NO nilValue:nil];
     });
 
     return empty;
@@ -48,7 +48,7 @@
 
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        notFound = [[NSObject alloc] init];
+        notFound = [NSObject new];
     });
 
     return notFound;
@@ -58,12 +58,12 @@
 
 + (instancetype)hashMapWithMeta:(id<CLJIPersistentMap>)meta count:(NSUInteger)count rootNode:(id<CLJIPersistentHashMapNode>)root hasNilValue:(BOOL)hasNilValue nilValue:(id)nilValue
 {
-    return [[self alloc] initWithMeta:meta count:count root:root hasNilValue:hasNilValue nilValue:nilValue];
+    return [[self alloc] initWithMeta:meta count:count rootNode:root hasNilValue:hasNilValue nilValue:nilValue];
 }
 
 #pragma mark - Initialization methods
 
-- (instancetype)initWithMeta:(id<CLJIPersistentMap>)meta count:(NSUInteger)count root:(id<CLJIPersistentHashMapNode>)root hasNilValue:(BOOL)hasNilValue nilValue:(id)nilValue
+- (instancetype)initWithMeta:(id<CLJIPersistentMap>)meta count:(NSUInteger)count rootNode:(id<CLJIPersistentHashMapNode>)root hasNilValue:(BOOL)hasNilValue nilValue:(id)nilValue
 {
     if (self = [super init])
     {
@@ -75,6 +75,13 @@
     }
 
     return self;
+}
+
+#pragma mark - CLJIObj
+
+- (instancetype)withMeta:(id<CLJIPersistentMap>)meta
+{
+    return [[self class] hashMapWithMeta:meta count:self.count rootNode:self.root hasNilValue:self.hasNil nilValue:self.nilValue];
 }
 
 #pragma mark - CLJIPersistentMap
@@ -108,11 +115,6 @@
     return notFound != found;
 }
 
-//public IMapEntry entryAt(Object key){
-//	if(key == null)
-//		return hasNull ? new MapEntry(null, nullValue) : null;
-//	return (root != null) ? root.find(0, hash(key), key) : null;
-//}
 - (id<CLJIMapEntry>)entryAt:(id)key
 {
     if (nil == key) return self.hasNil ? [CLJMapEntry mapEntryWithKey:nil object:self.nilValue] : nil;

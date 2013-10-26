@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Emmanuel Gomez. All rights reserved.
 //
 
+
 #import "NSDictionary+CLJILookup.h"
 
 @implementation NSDictionary (CLJILookup)

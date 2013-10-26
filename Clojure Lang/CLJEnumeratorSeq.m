@@ -10,4 +10,15 @@
 
 @implementation CLJEnumeratorSeq
 
+- (instancetype)initWithMeta:(id<CLJIPersistentMap>)meta enumerator:(NSEnumerator *)enumerator
+{
+    self = [super initWithMeta:meta];
+    if (self)
+    {
+        
+    }
+
+    return self;
+}
+
 @end

@@ -38,7 +38,7 @@
 {
     CLJPersistentHashMap *emptyMap = [CLJPersistentHashMap empty];
     NSUInteger count = [emptyMap count];
-    XCTAssert(0 == count, @"received non-zero count (%d)", count);
+    XCTAssert(0 == count, @"received non-zero count (%lu)", (unsigned long)count);
 }
 
 - (void)testEntryAtReturnsNilForAnUnknownKey
@@ -50,16 +50,16 @@
 - (void)testAssocKeyWithObjectReturnsANewHashMap
 {
     CLJPersistentHashMap *emptyMap = [CLJPersistentHashMap empty];
-    CLJPersistentHashMap *simple = [emptyMap assocKey:@"foo" withObject:@"bar"];
+    id<CLJIPersistentMap> simple = [emptyMap assocKey:@"foo" withObject:@"bar"];
     XCTAssert(simple != emptyMap, @"assockKey:withObject: returned the receiver");
 }
 
 - (void)testAssocKeyWithObjectReturnsAHashMapWithIncrementedCount
 {
     CLJPersistentHashMap *emptyMap = [CLJPersistentHashMap empty];
-    CLJPersistentHashMap *simple = [emptyMap assocKey:@"foo" withObject:@"bar"];
+    id<CLJIPersistentMap> simple = [emptyMap assocKey:@"foo" withObject:@"bar"];
     NSUInteger count = [simple count];
-    XCTAssert(1 == count, @"count returned unexpected amount: %d", count);
+    XCTAssert(1 == count, @"count returned unexpected amount: %lu", (unsigned long)count);
 }
 
 - (void)testEntryAtReturnsExpectedObjectAfterAssocKeyWithObject
@@ -67,7 +67,7 @@
     CLJPersistentHashMap *emptyMap = [CLJPersistentHashMap empty];
     id key = [NSString stringWithFormat:@"%@", @"foo"];
     id object = @"bar";
-    CLJPersistentHashMap *simple = [emptyMap assocKey:key withObject:object];
+    id<CLJIPersistentMap> simple = [emptyMap assocKey:key withObject:object];
     id retrieved = [simple entryAt:key];
     XCTAssert([retrieved object] == object, @"entryAt: returned different object after assockKey:withObject:");
 }
@@ -77,7 +77,7 @@
     CLJPersistentHashMap *emptyMap = [CLJPersistentHashMap empty];
     id key = [NSString stringWithFormat:@"%@", @"foo"];
     id object = @"bar";
-    CLJPersistentHashMap *simple = [emptyMap assocKey:key withObject:object];
+    id<CLJIPersistentMap> simple = [emptyMap assocKey:key withObject:object];
     BOOL retrieved = [simple containsKey:key];
     XCTAssertTrue(retrieved, @"containsKey: returned NO after assockKey:withObject:");
 }

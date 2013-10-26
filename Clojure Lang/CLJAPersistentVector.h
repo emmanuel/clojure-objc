@@ -12,11 +12,17 @@
 #import "CLJIPersistentVector.h"
 
 
-@interface CLJAPersistentVector : CLJAFn <CLJIObj, CLJIPersistentVector, NSCoding>
+@interface CLJAPersistentVector : CLJAFn <CLJIObj, CLJIPersistentVector>
 
 + (instancetype)empty;
 
+- (instancetype)empty;
 - (instancetype)cons:(id)object;
 - (instancetype)assocN:(NSUInteger)i withObject:(id)object;
+
+@end
+
+
+@interface CLJAPersistentVector (NotImplemented) <NSCoding>
 
 @end

@@ -17,9 +17,12 @@
 
 @end
 
+#pragma clang diagnostic ignored "-Wprotocol"
+
+
 @implementation CLJLazySeq
 {
-    id sv;
+//    id sv;
 }
 
 #pragma mark - Initialization methods

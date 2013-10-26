@@ -15,8 +15,4 @@
 // TODO: conform to and implement NSCoding
 @interface CLJAPersistentMap : CLJAFn <CLJIPersistentMap, CLJIHashEq>
 
-- (instancetype)assocKey:(id)key withObject:(id)object;
-- (instancetype)assocEx:(id)key withObject:(id)object;
-- (instancetype)without:(id)key;
-
 @end

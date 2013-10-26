@@ -22,7 +22,7 @@
 
 static const inline void CLJAFn_throwArity(NSUInteger actual, NSString *name)
 {
-    NSString *reason = [NSString stringWithFormat:@"Wrong number of args (%lu) passed to: %@", actual, name];
+    NSString *reason = [NSString stringWithFormat:@"Wrong number of args (%lu) passed to: %@", (unsigned long)actual, name];
     @throw [NSException exceptionWithName:NSInvalidArgumentException
                                    reason:reason
                                  userInfo:nil];

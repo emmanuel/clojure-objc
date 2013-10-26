@@ -14,17 +14,10 @@
 
 //public abstract class ASeq extends Obj implements ISeq, Sequential, List, Serializable, IHashEq {
 
-@interface CLJASeq : CLJObj <CLJISeq, CLJSequential, NSCoding, CLJIHashEq>
+@interface CLJASeq : CLJObj <CLJISeq, CLJSequential, CLJIHashEq, NSCoding>
 
 - (id<CLJIPersistentCollection>)empty;
 - (BOOL)equiv:(id)obj;
-- (id)peek;
-- (id<CLJIPersistentList>)pop;
 - (id<CLJISeq>)rest;
 
 @end
-
-//public ISeq cons(Object o){
-//	return new Cons(o, this);
-//}
-//

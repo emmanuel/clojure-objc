@@ -10,7 +10,7 @@
 #import "CLJPersistentVectorConstants.h"
 
 
-@interface CLJPersistentVectorNode : NSObject <NSCoding>
+@interface CLJPersistentVectorNode : NSObject
 
 @property (atomic, strong) NSThread *editThread;
 @property (nonatomic, strong) NSArray *array;
@@ -20,5 +20,10 @@
 
 - (instancetype)initWithEditThread:(NSThread *)editThread array:(NSArray *)array;
 - (instancetype)nodeWithArray:(NSArray *)array;
+
+@end
+
+
+@interface CLJPersistentVectorNode (NotImplemented) <NSCoding>
 
 @end

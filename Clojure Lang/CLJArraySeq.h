@@ -14,6 +14,6 @@
 @property (nonatomic, readonly, strong) NSArray *array;
 @property (nonatomic, readonly) NSUInteger index;
 
-- (instancetype)initWithMeta:(id<CLJIPersistentMap>)meta array:(NSArray *)array;
+- (instancetype)initWithMeta:(id<CLJIPersistentMap>)meta array:(NSArray *)array index:(NSUInteger)index;
 
 @end

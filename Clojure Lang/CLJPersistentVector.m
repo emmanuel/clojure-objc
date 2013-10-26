@@ -23,7 +23,7 @@
 
 @implementation CLJPersistentVector
 
-+ (CLJPersistentVector *)empty
++ (instancetype)empty
 {
     static CLJPersistentVector *emptyVector;
     
@@ -66,10 +66,14 @@
     return self;
 }
 
+#pragma mark - CLJIObj methods
+
 - (instancetype)withMeta:(id<CLJIPersistentMap>)meta
 {
     return [[self class] vectorWithMeta:meta count:self.count shift:self.shift root:self.root tail:self.tail];
 }
+
+#pragma mark - CLJIPersistentVector methods
 
 - (instancetype)assocN:(NSUInteger)index withObject:(id)object
 {
@@ -112,27 +116,7 @@
     }
 }
 
-- (CLJPersistentVectorNode *)doAssocWithLevel:(NSUInteger)level node:(CLJPersistentVectorNode *)node index:(NSInteger)index object:(id)object;
-{
-    NSUInteger subIndex = NSUIntegerMax;
-    id newObject = nil;
-
-    if (level == 0)
-    {
-        subIndex = index & kCLJPersistentVectorCurrentLevelMask;
-        newObject = object;
-    }
-    else
-    {
-        subIndex = (index >> level) & kCLJPersistentVectorCurrentLevelMask;
-        newObject = [self doAssocWithLevel:(level - kCLJPersistentVectorLevelBitPartitionWidth)
-                                      node:node.array[subIndex]
-                                     index:index
-                                    object:object];
-    }
-
-    return [node nodeWithArray:[node.array arrayWithIndex:subIndex setToObject:newObject]];
-}
+#pragma mark - CLJIPersistentCollection methods
 
 - (CLJPersistentVector *)cons:(id)object
 {
@@ -177,6 +161,75 @@
                                        root:newRoot
                                        tail:@[ object ]];
     }
+}
+
+#pragma mark - CLJIPersistentStack methods
+
+- (CLJPersistentVector *)pop
+{
+    if (self.count == 0)
+    {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"can't pop empty vector" userInfo:nil];
+    }
+    else if (self.count == 1)
+    {
+        return [[[self class] empty] withMeta:self.meta];
+    }
+    // Pop tail
+    else if ((self.count - [self tailOff]) > 1)
+    {
+        return [[self class] vectorWithMeta:self.meta
+                                      count:(self.count - 1)
+                                      shift:self.shift
+                                       root:self.root
+                                       tail:[self.tail arrayByRemovingLastObject]];
+    }
+    // Pop tree
+    else
+    {
+        NSArray *newTail = [self arrayForIndex:(self.count - 2)];
+        CLJPersistentVectorNode *newRoot = [self popTailWithLevel:self.shift node:self.root];
+        NSUInteger newShift = self.shift;
+        if (newRoot == nil)
+        {
+            newRoot = [CLJPersistentVectorNode empty];
+        }
+        // omit what would be an empty root
+        else if ((self.shift > kCLJPersistentVectorLevelBitPartitionWidth) && ([newRoot.array count] == 1))
+        {
+            newRoot = [newRoot.array firstObject];
+            newShift -= kCLJPersistentVectorLevelBitPartitionWidth;
+        }
+        return [[self class] vectorWithMeta:self.meta
+                                      count:(self.count - 1)
+                                      shift:newShift
+                                       root:newRoot
+                                       tail:newTail];
+    }
+}
+
+#pragma mark - Private/Internal methods
+
+- (CLJPersistentVectorNode *)doAssocWithLevel:(NSUInteger)level node:(CLJPersistentVectorNode *)node index:(NSInteger)index object:(id)object;
+{
+    NSUInteger subIndex = NSUIntegerMax;
+    id newObject = nil;
+    
+    if (level == 0)
+    {
+        subIndex = index & kCLJPersistentVectorCurrentLevelMask;
+        newObject = object;
+    }
+    else
+    {
+        subIndex = (index >> level) & kCLJPersistentVectorCurrentLevelMask;
+        newObject = [self doAssocWithLevel:(level - kCLJPersistentVectorLevelBitPartitionWidth)
+                                      node:node.array[subIndex]
+                                     index:index
+                                    object:object];
+    }
+    
+    return [node nodeWithArray:[node.array arrayWithIndex:subIndex setToObject:newObject]];
 }
 
 - (CLJPersistentVectorNode *)nodeWithWithPathToNode:(CLJPersistentVectorNode *)targetNode
@@ -244,49 +297,6 @@
     ret.array = [parent.array arrayByAddingObject:nodeToInsert];
 
     return ret;
-}
-
-- (CLJPersistentVector *)pop
-{
-    if (self.count == 0)
-    {
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"can't pop empty vector" userInfo:nil];
-    }
-    else if (self.count == 1)
-    {
-        return [[[self class] empty] withMeta:self.meta];
-    }
-    // Pop tail
-    else if ((self.count - [self tailOff]) > 1)
-    {
-        return [[self class] vectorWithMeta:self.meta
-                                      count:(self.count - 1)
-                                      shift:self.shift
-                                       root:self.root
-                                       tail:[self.tail arrayByRemovingLastObject]];
-    }
-    // Pop tree
-    else
-    {
-        NSArray *newTail = [self arrayForIndex:(self.count - 2)];
-        CLJPersistentVectorNode *newRoot = [self popTailWithLevel:self.shift node:self.root];
-        NSUInteger newShift = self.shift;
-        if (newRoot == nil)
-        {
-            newRoot = [CLJPersistentVectorNode empty];
-        }
-        // omit what would be an empty root
-        else if ((self.shift > kCLJPersistentVectorLevelBitPartitionWidth) && ([newRoot.array count] == 1))
-        {
-            newRoot = [newRoot.array firstObject];
-            newShift -= kCLJPersistentVectorLevelBitPartitionWidth;
-        }
-        return [[self class] vectorWithMeta:self.meta
-                                      count:(self.count - 1)
-                                      shift:newShift
-                                       root:newRoot
-                                       tail:newTail];
-    }
 }
 
 - (NSInteger)tailOff

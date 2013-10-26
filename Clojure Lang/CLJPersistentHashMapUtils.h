@@ -24,15 +24,9 @@
 
 AINLINE NSUInteger CLJPersistentHashMapUtil_mask(NSUInteger hash, NSUInteger shift);
 
-AINLINE NSUInteger CLJPersistentHashMapUtil_bitpos(NSUInteger hash, NSUInteger shift);
+AINLINE NSUInteger CLJPersistentHashMapUtil_bitPosition(NSUInteger hash, NSUInteger shift);
 
 AINLINE NSUInteger CLJPersistentHashMapUtil_bitRank(NSUInteger bitmap, NSUInteger bit);
 AINLINE NSUInteger CLJPersistentHashMapUtil_bitPopulation(NSUInteger bits);
-
-AINLINE CFTypeRef * const CLJPersistentHashMapArrayNode_cloneAndSet(CFTypeRef *sourceArray, NSUInteger index, id object);
-
-AINLINE CFTypeRef * const CLJPersistentHashMapArrayNode_makeNilFilledArray();
-
-AINLINE CFTypeRef * const CLJPersistentHashMapArrayNode_makeFullSizeNilFilledArray();
 
 #endif

@@ -10,20 +10,16 @@
 
 @implementation CLJArraySeq
 
-- (instancetype)initWithMeta:(id<CLJIPersistentMap>)meta
-                       array:(NSArray *)anArray
-                       index:(NSUInteger)anIndex
+- (instancetype)initWithMeta:(id<CLJIPersistentMap>)meta array:(NSArray *)anArray index:(NSUInteger)anIndex
 {
     self = [super initWithMeta:meta];
     if (self)
     {
-        _array = [anArray copy];
+        _array = [NSArray arrayWithArray:anArray];
         _index = anIndex;
     }
 
     return self;
 }
-
-
 
 @end

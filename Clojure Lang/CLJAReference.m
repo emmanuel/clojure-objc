@@ -34,12 +34,6 @@
     return self;
 }
 
-- (id)init
-{
-    return [self initWithMeta:nil];
-}
-
-
 #pragma mark - CLJIReference methods
 
 - (id<CLJIPersistentMap>)alterMeta:(id<CLJIFn>)alterFn withSeq:(id<CLJISeq>)seq
@@ -50,6 +44,12 @@
         _meta = [alterFn applyTo:[[CLJCons alloc] init]];
         return _meta;
     }
+}
+
+- (id<CLJIPersistentMap>)resetMeta:(id<CLJIPersistentMap>)meta
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
 }
 
 @end
